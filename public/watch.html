@@ -2334,3 +2334,17 @@ document.addEventListener('keydown', (e) => {
 </script>
 </body>
 </html>
+<script>
+  // حل نهائي لتفعيل أزرار التحكم في المشغل (الإيقاف والتقديم والترجمة)
+  document.addEventListener("DOMContentLoaded", function() {
+    // إزالة أي طبقات شفافة فوق المشغل تمنع النقر
+    const overlays = document.querySelectorAll('.video-overlay, .player-overlay, .overlay');
+    overlays.forEach(ov => ov.remove());
+
+    // السماح بالتفاعل الكامل مع عناصر المشغل والفيديو
+    const interactiveElements = document.querySelectorAll('iframe, video, .player-container, #player, .jw-video');
+    interactiveElements.forEach(el => {
+      el.style.pointerEvents = 'auto';
+    });
+  });
+</script>
