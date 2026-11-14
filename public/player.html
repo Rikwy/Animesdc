@@ -29,7 +29,6 @@
             -webkit-user-select: none;
         }
 
-        /* Poster backdrop (shown until playback starts) */
         #poster {
             position: absolute;
             inset: 0;
@@ -55,7 +54,6 @@
             background: #000;
         }
 
-        /* Big center play button */
         #big-play {
             position: absolute;
             top: 50%;
@@ -79,7 +77,6 @@
         #big-play svg { width: 36px; height: 36px; margin-right: 4px; }
         #big-play.hide { opacity: 0; pointer-events: none; }
 
-        /* Top controls */
         #controls-top {
             position: absolute;
             top: 0;
@@ -105,7 +102,6 @@
             text-overflow: ellipsis;
         }
 
-        /* Loading */
         #loading-overlay {
             position: absolute;
             top: 50%;
@@ -130,7 +126,6 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         #loading-text { color: #ccc; font-size: 14px; letter-spacing: 0.3px; }
 
-        /* Error */
         #error-overlay {
             position: absolute;
             top: 50%;
@@ -148,7 +143,6 @@
         #error-icon { font-size: 46px; opacity: 0.6; }
         #error-text { color: #ddd; font-size: 16px; max-width: 420px; line-height: 1.5; }
 
-        /* Skip intro/outro */
         #skip-controls {
             position: absolute;
             left: 18px;
@@ -181,7 +175,6 @@
         .skip-btn.show { opacity: 1; transform: translateX(0); }
         .skip-btn:hover { background: rgba(229,30,58,0.9); border-color: #e51e3a; }
 
-        /* Bottom controls */
         #controls {
             position: absolute;
             bottom: 0;
@@ -201,7 +194,6 @@
             gap: 6px;
         }
 
-        /* Custom seek bar */
         #seek-bar {
             position: relative;
             width: 100%;
@@ -293,7 +285,6 @@
             cursor: pointer;
         }
 
-        /* Settings menu */
         #settings-btn { font-size: 18px; }
         #settings-menu {
             position: absolute;
@@ -351,7 +342,6 @@
         .menu-item.hide { display: none; }
         #cc-btn.on { color: #b5a8ff; }
 
-        /* Seek indicator */
         .seek-indicator {
             position: absolute;
             top: 50%;
@@ -414,7 +404,7 @@
             <button id="skip-outro-btn" class="skip-btn">تخطي النهاية</button>
         </div>
         <button id="big-play" title="تشغيل">
-            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="19,3 5,12 19,21"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
         </button>
         <video id="hls-video" playsinline controlslist="nodownload" preload="metadata"></video>
         <div id="center-flash"></div>
@@ -433,13 +423,13 @@
                 <div id="seek-thumb" class="seek-thumb"></div>
             </div>
             <div class="controls-row">
-                <button id="prev-ep-btn" class="ctrl-btn" title="الحلقة السابقة"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 6h-2v12h2zm-3.5 6L6 6v12z"/></svg></button>
-                <button id="play-btn" class="ctrl-btn" title="تشغيل/إيقاف"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="19,3 5,12 19,21"/></svg></button>
-                <button id="rewind-btn" class="ctrl-btn" title="ترجيع 10 ثواني"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
-                <button id="forward-btn" class="ctrl-btn" title="تقديم 10 ثواني"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
-                <button id="next-ep-btn" class="ctrl-btn" title="الحلقة التالية"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5-6v12z"/></svg></button>
+                <button id="prev-ep-btn" class="ctrl-btn" title="الحلقة السابقة"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
+                <button id="play-btn" class="ctrl-btn" title="تشغيل/إيقاف"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg></button>
+                <button id="rewind-btn" class="ctrl-btn" title="ترجيع 10 ثواني"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                <button id="forward-btn" class="ctrl-btn" title="تقديم 10 ثواني"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
+                <button id="next-ep-btn" class="ctrl-btn" title="الحلقة التالية"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h2v12H4zm3.5 6 8.5-6v12z"/></svg></button>
                 <div id="volume-container">
-                    <button id="mute-btn" class="ctrl-btn" title="كتم الصوت"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="13 5 18 9 22 9 22 15 18 15 13 19"/></svg></button>
+                    <button id="mute-btn" class="ctrl-btn" title="كتم الصوت"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19"/></svg></button>
                     <input type="range" id="volume-bar" value="100" min="0" max="100">
                 </div>
                 <span id="time-display">0:00 / 0:00</span>
