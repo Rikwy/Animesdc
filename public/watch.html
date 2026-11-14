@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Watch Anime - AnimeVerse</title>
+    <title>مشاهدة الأنمي - AnimeLuther</title>
     <link rel="shortcut icon" href="img/TITLEBAR.PNG" type="image/x-icon"/>
     <link rel="stylesheet" href="css/style.css?v=20260830">
     <link rel="stylesheet" href="css/themes.css?v=20260830">
@@ -12,7 +12,7 @@
     <style>
         /* Mini reset for standalone pages */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Nunito', sans-serif; background: #0b0e1a; color: #fff; min-height: 100vh; }
+        body { font-family: 'Nunito', sans-serif; background: #0b0e1a; color: #fff; min-height: 100vh; text-align: right; }
         .watch-container { max-width: 1500px; margin: 0 auto; padding: 20px; }
         .watch-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
         .watch-header h1 { font-size: 1.4rem; font-weight: 700; color: #e8e8e8; }
@@ -67,7 +67,7 @@
         .ctrl > i { font-size: 0.85rem; width: 15px; text-align: center; }
         .ctrl.forward { padding: 8px 12px; font-size: 0.85rem; }
         .ctrl.forward:disabled { opacity: 0.35; pointer-events: none; }
-        .ctrl.check { flex-direction: row-reverse; padding: 5px 8px 5px 10px; }
+        .ctrl.check { flex-direction: row; padding: 5px 10px 5px 8px; }
         .ctrl.check input[type="checkbox"] {
             appearance: none; -webkit-appearance: none;
             width: 30px; height: 17px; border-radius: 10px;
@@ -75,12 +75,12 @@
             flex-shrink: 0; margin: 0;
         }
         .ctrl.check input[type="checkbox"]::after {
-            content: ''; position: absolute; top: 2px; left: 2px;
+            content: ''; position: absolute; top: 2px; right: 2px;
             width: 13px; height: 13px; border-radius: 50%; background: #9aa6bd;
             transition: transform .15s, background .15s;
         }
         .ctrl.check input[type="checkbox"]:checked { background: #e45f3a; }
-        .ctrl.check input[type="checkbox"]:checked::after { transform: translateX(13px); background: #fff; }
+        .ctrl.check input[type="checkbox"]:checked::after { transform: translateX(-13px); background: #fff; }
         .ctrl.check input[type="checkbox"]:disabled { opacity: .4; cursor: not-allowed; }
         .ctrl.check label { margin: 0; cursor: pointer; color: inherit; font-size: 0.76rem; font-weight: 700; line-height: 1; }
         .ctrl.auto-skip label { color: #f0a500; }
@@ -89,8 +89,7 @@
         .ctrl.layout.on { color: #b5a8ff; }
 
         .controls-left { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-
-        .controls-right { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+        .controls-right { display: flex; align-items: center; gap: 6px; margin-right: auto; margin-left: 0; }
 
         .current-episode-info { display: flex; flex-direction: column; margin: 0 10px; min-width: 0; }
         .current-episode-name { font-size: 0.85rem; font-weight: 700; color: #e8ecf4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px; }
@@ -108,7 +107,7 @@
         .w-score { display: inline-flex; align-items: center; gap: 5px; color: #f0a500; font-weight: 800; font-size: 0.88rem; margin-bottom: 8px; }
         .w-airing { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; padding: 6px 10px; background: rgba(181, 168, 255, 0.08); border: 1px solid rgba(181, 168, 255, 0.25); border-radius: 8px; font-size: 0.75rem; font-weight: 700; color: #cbbfff; }
         .w-airing i { color: #b5a8ff; font-size: 0.8rem; }
-        .w-airing .air-at { margin-left: auto; color: #b5a8ff; white-space: nowrap; }
+        .w-airing .air-at { margin-right: auto; margin-left: 0; color: #b5a8ff; white-space: nowrap; }
         .w-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
         .badge {
             padding: 3px 9px; border-radius: 20px; background: #232945;
@@ -131,7 +130,7 @@
         .list-btn.in-list { background: rgba(181, 168, 255, 0.12); color: #fff; }
         .list-btn.in-list i { color: #b5a8ff; }
         .list-menu {
-            display: none; position: absolute; z-index: 30; top: calc(100% + 6px); left: 0; right: 0;
+            display: none; position: absolute; z-index: 30; top: calc(100% + 6px); right: 0; left: 0;
             background: #151f2e; border: 1px solid rgba(159, 173, 189, 0.15); border-radius: 10px;
             padding: 4px; box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5); overflow: hidden;
         }
@@ -171,8 +170,8 @@
         .ep-filter { display: flex; flex: 1; align-items: center; gap: 0.4rem; padding: 0.5rem 0.6rem; background: #151f2e; border: 1px solid rgba(159, 173, 189, 0.12); border-radius: 0.45rem; min-width: 120px; transition: background-color .15s; }
         .ep-filter:focus-within { background: #243146; }
         .ep-filter i { font-size: 0.75rem; color: #7a86a0; }
-        .ep-filter input { width: 100%; background: transparent; border: none; outline: none; color: #e8ecf4; font-size: 0.78rem; }
-        .ep-filter input::placeholder { color: #7a86a0; }
+        .ep-filter input { width: 100%; background: transparent; border: none; outline: none; color: #e8ecf4; font-size: 0.78rem; text-align: right; }
+        .ep-filter input::placeholder { color: #7a86a0; text-align: right; }
         .ep-tool-btn { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 2.15rem; height: 2.15rem; color: #c8d0e0; cursor: pointer; background: #151f2e; border: 1px solid rgba(159, 173, 189, 0.12); border-radius: 0.45rem; transition: background-color .15s, color .15s, border-color .15s; }
         .ep-tool-btn:hover { background: #243146; color: #e8ecf4; }
         .ep-tool-btn:active { transform: scale(0.9); }
@@ -180,9 +179,9 @@
 
         .ep-next-banner { display: flex; align-items: center; gap: 8px; margin: 0.5rem 0.6rem 0; padding: 0.5rem 0.7rem; background: rgba(181, 168, 255, 0.08); border: 1px solid rgba(181, 168, 255, 0.25); border-radius: 0.45rem; font-size: 0.78rem; font-weight: 600; color: #cbbfff; }
         .ep-next-banner i { color: var(--c-accent, #b5a8ff); }
-        .ep-next-banner .air-at { margin-left: auto; font-weight: 800; color: var(--c-accent, #b5a8ff); white-space: nowrap; }
+        .ep-next-banner .air-at { margin-right: auto; margin-left: 0; font-weight: 800; color: var(--c-accent, #b5a8ff); white-space: nowrap; }
 
-        /* Episode List (miruro: display:grid; gap:.24rem; align-content:start; padding:.4rem; overflow-y:auto) */
+        /* Episode Grid */
         .episode-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); gap: 0.24rem; padding: 0.4rem; align-content: start; max-height: 420px; overflow-y: auto; scrollbar-gutter: stable; }
         .episode-grid::-webkit-scrollbar { width: 5px; }
         .episode-grid::-webkit-scrollbar-track { background: #1b2536; border-radius: 4px; }
@@ -198,15 +197,14 @@
         .ep-btn.active { background: var(--c-accent, #595991); color: var(--c-accent-text, #fff); border-color: transparent; }
         .ep-btn.loading { opacity: 0.5; pointer-events: none; }
         .ep-btn.watched:not(.active) { color: #3f8f5f; }
-        .ep-btn.watched:not(.active)::after { content: '\2713'; position: absolute; top: 2px; right: 5px; font-size: 0.55rem; color: #22c55e; }
+        .ep-btn.watched:not(.active)::after { content: '\2713'; position: absolute; top: 2px; left: 5px; font-size: 0.55rem; color: #22c55e; }
         .ep-btn { position: relative; }
 
-        /* Footer (miruro ._listFooter_llxst_33) */
         .ep-list-footer { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0.5rem 0.75rem; font-size: 0.8rem; color: #9aa6bd; background: rgba(21, 31, 46, 0.6); border-top: 1px solid rgba(159, 173, 189, 0.08); }
         .ep-list-footer .now { color: #e8ecf4; font-weight: 700; }
-        .ep-list-footer .now i { color: var(--c-accent, #b5a8ff); margin-right: 4px; }
+        .ep-list-footer .now i { color: var(--c-accent, #b5a8ff); margin-left: 4px; margin-right: 0; }
         .episode-grid.list .ep-grid-item.list-row.watched:not(.active) .ep-num { color: #22c55e; }
-        .episode-grid.image .ep-grid-item.image-card.watched:not(.active)::after { content: '\2713'; position: absolute; top: 6px; right: 6px; background: rgba(34, 197, 94, 0.85); color: #fff; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; }
+        .episode-grid.image .ep-grid-item.image-card.watched:not(.active)::after { content: '\2713'; position: absolute; top: 6px; left: 6px; background: rgba(34, 197, 94, 0.85); color: #fff; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; }
         .episode-grid.image .ep-grid-item.image-card.watched:not(.active) { opacity: 0.85; }
 
         /* List (row) view */
@@ -222,7 +220,7 @@
         .ep-grid-item.image-card { position: relative; aspect-ratio: 16 / 9; border-radius: 0.5rem; overflow: hidden; cursor: pointer; border: 2px solid transparent; background: #151f2e center / cover no-repeat; display: flex; align-items: flex-end; height: auto; transition: border-color .15s, filter .15s; }
         .ep-grid-item.image-card:hover { filter: brightness(1.05); outline: 1px solid rgba(255, 255, 255, 0.8); }
         .ep-grid-item.image-card.active { border-color: #b5a8ff; }
-        .ep-grid-item.image-card .ep-num { position: absolute; top: 6px; left: 6px; background: rgba(0, 0, 0, 0.65); padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; color: #fff; }
+        .ep-grid-item.image-card .ep-num { position: absolute; top: 6px; right: 6px; background: rgba(0, 0, 0, 0.65); padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; color: #fff; }
         .ep-grid-item.image-card .ep-title { width: 100%; padding: 5px 6px; background: linear-gradient(transparent, rgba(0, 0, 0, 0.85)); font-size: 0.62rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         /* Spoilers mode */
@@ -230,7 +228,7 @@
         .episode-grid.spoilers .ep-row-title,
         .episode-grid.spoilers .ep-title { filter: blur(5px); }
 
-        /* Server Buttons (miruro "Source & Data" style) */
+        /* Server Buttons */
         .server-panel { padding: 0; overflow: hidden; }
         .server-panel .panel-head {
             display: flex; align-items: center; justify-content: space-between; gap: 10px;
@@ -246,11 +244,11 @@
         }
         .sv-btn:hover { background: #243146; border-color: rgba(255, 255, 255, 0.25); color: #e8ecf4; }
         .sv-btn.active { background: #e45f3a; border-color: #e45f3a; color: #fff; }
-        .sv-btn.sub { border-left: 3px solid #22c55e; }
-        .sv-btn.dub { border-left: 3px solid #f59e0b; }
-        .sv-btn.raw { border-left: 3px solid #ef4444; }
-        .sv-btn.embed { border-left: 3px solid #a855f7; }
-        .sv-btn .embed-badge { font-size: 0.6rem; font-weight: 700; background: #a855f7; color: #fff; padding: 1px 6px; border-radius: 8px; margin-left: 6px; vertical-align: 1px; }
+        .sv-btn.sub { border-right: 3px solid #22c55e; border-left: none; }
+        .sv-btn.dub { border-right: 3px solid #f59e0b; border-left: none; }
+        .sv-btn.raw { border-right: 3px solid #ef4444; border-left: none; }
+        .sv-btn.embed { border-right: 3px solid #a855f7; border-left: none; }
+        .sv-btn .embed-badge { font-size: 0.6rem; font-weight: 700; background: #a855f7; color: #fff; padding: 1px 6px; border-radius: 8px; margin-right: 6px; margin-left: 0; vertical-align: 1px; }
 
         .server-section { margin-bottom: 14px; }
         .server-type-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.2px; color: #5a6280; margin-bottom: 7px; display: flex; align-items: center; gap: 8px; }
@@ -258,8 +256,8 @@
 
         /* Episode meta info */
         .ep-meta { color: #7a82a0; font-size: 0.85rem; margin-bottom: 12px; }
-        .ep-meta span { margin-right: 12px; }
-        .ep-meta i { margin-right: 4px; color: #e45f3a; }
+        .ep-meta span { margin-left: 12px; margin-right: 0; }
+        .ep-meta i { margin-left: 4px; margin-right: 0; color: #e45f3a; }
 
         .loading-text { color: #5a6280; font-size: 0.85rem; padding: 12px 0; }
 
@@ -276,7 +274,7 @@
         }
         .retry-btn:hover { background: #c01830; }
 
-        /* ============ Anikaitv-style site header (menu fixes) ============ */
+        /* Header (menu fixes) */
         header {
             position: relative !important;
             margin-bottom: 0;
@@ -285,16 +283,17 @@
             border-bottom: 1px solid var(--c-border);
         }
         header .wrapper { height: auto; min-height: 4.2rem; padding: 0 0.5rem; }
-        header .wrapper .start { width: auto; position: relative; margin-right: 2.5rem; }
+        header .wrapper .start { width: auto; position: relative; margin-left: 2.5rem; margin-right: 0; }
         header #menu { position: static; }
-        header #menu-toggler { margin-right: 10px; }
-        header .logo { margin-right: 2rem; }
+        header #menu-toggler { margin-left: 10px; margin-right: 0; }
+        header .logo { margin-left: 2rem; margin-right: 0; }
 
         header #menu > ul {
             display: none;
             position: absolute;
             top: 100%;
-            left: 0;
+            right: 0;
+            left: auto;
             min-width: 240px;
             margin: 0;
             padding: 10px 0;
@@ -314,7 +313,8 @@
             header #menu > ul {
                 position: absolute;
                 top: 100%;
-                left: 0;
+                right: 0;
+                left: auto;
                 max-height: calc(100vh - 6rem);
                 overflow-y: auto;
                 border-radius: 0 0 10px 10px;
@@ -322,17 +322,17 @@
             header #menu > ul > li > ul,
             header #menu > ul > li.active > ul {
                 position: static;
-                left: auto;
+                right: auto;
                 width: 100% !important;
                 height: auto;
-                padding: 0 0 0 18px;
+                padding: 0 18px 0 0;
                 overflow: visible;
             }
             header #menu > ul > li.active > ul > li { opacity: 1; float: none; width: 100% !important; }
             header #menu > ul > li > a { font-size: 1rem; }
         }
 
-        /* ============ Miruro-style header search ============ */
+        /* Miruro-style header search */
         header .wrapper { gap: 12px; }
         #search { flex-grow: 1; display: flex; justify-content: center; min-width: 0; }
         #search form {
@@ -342,7 +342,7 @@
             width: 100%;
             max-width: 560px;
             height: 40px;
-            padding: 0 8px 0 6px;
+            padding: 0 6px 0 8px;
             background: var(--c-surface-3);
             border: 1px solid var(--c-border);
             border-radius: 999px;
@@ -353,7 +353,7 @@
             background: var(--c-surface);
             box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-accent) 18%, transparent);
         }
-        #search form button { order: -1; font-size: 1.05rem; color: var(--c-text-3); cursor: pointer; }
+        #search form button { order: 1; font-size: 1.05rem; color: var(--c-text-3); cursor: pointer; }
         #search form button:hover { color: var(--c-text); }
         #search form input {
             order: 0;
@@ -363,10 +363,11 @@
             padding: 0 4px;
             font-size: 0.95rem;
             color: var(--c-text);
+            text-align: right;
         }
-        #search form input::placeholder { color: var(--c-text-3); }
+        #search form input::placeholder { color: var(--c-text-3); text-align: right; }
         #search form .s-clear {
-            order: 1;
+            order: -1;
             display: none;
             align-items: center;
             justify-content: center;
@@ -386,8 +387,8 @@
             display: none;
             position: absolute;
             top: calc(100% + 8px);
-            left: 0;
             right: 0;
+            left: 0;
             padding-top: 0;
             background: var(--c-surface);
             border: 1px solid var(--c-border);
@@ -397,13 +398,15 @@
             font-size: 0.95rem;
             line-height: normal;
             z-index: 80;
+            text-align: right;
         }
         #search.search-open .search-popup { display: block !important; }
         #search .search-popup .s-close {
             display: none;
             position: absolute;
             top: 10px;
-            right: 14px;
+            left: 14px;
+            right: auto;
             font-size: 0.8rem;
             color: var(--c-text-3);
             cursor: pointer;
@@ -472,24 +475,14 @@
             #search .search-popup .s-close { display: block; }
         }
 
-        /* Keep the live dropdown visible & tidy on narrow screens too */
-        @media (max-width: 1199.98px) {
-            #search .search-popup {
-                padding-top: 0 !important;
-                top: calc(100% + 8px) !important;
-                border-radius: 12px !important;
-            }
-            #search .search-popup .foot .hint { display: none; }
-        }
-
-        /* ============ Mobile search overrides ============ */
+        /* Mobile search overrides */
         @media (max-width: 1199.98px) {
             header .start { position: static; }
             #search-toggler { display: block; }
             #search {
                 display: none !important;
                 position: absolute;
-                top: 100%; left: 0; right: 0;
+                top: 100%; right: 0; left: 0;
                 width: 100%;
                 z-index: 80;
                 padding: 10px 12px;
@@ -531,7 +524,7 @@
             #search .search-popup { border-radius: 12px; }
         }
 
-        /* ============ Footer (centered, miruro-style) ============ */
+        /* Footer */
         footer { border-top: 1px solid var(--c-border); }
         footer .row { justify-content: center; text-align: center; }
         footer .row > div { flex: 1 1 100%; width: 100%; max-width: 900px; }
@@ -543,7 +536,8 @@
         .version-badge {
             display: inline-block;
             padding: 0.15rem 0.45rem;
-            margin-left: 0.25rem;
+            margin-right: 0.25rem;
+            margin-left: 0;
             font-family: 'Consolas', 'Menlo', monospace;
             font-size: 0.75rem;
             font-weight: 700;
@@ -554,7 +548,7 @@
             vertical-align: 1px;
         }
 
-        /* ============ AnimeX-style body layout ============ */
+        /* Watch body layout */
         .watch-head {
             display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
             padding: 14px 4px 16px; flex-wrap: wrap;
@@ -608,7 +602,7 @@
         .extras-card:hover { transform: translateY(-2px); border-color: rgba(181,168,255,.45); box-shadow: 0 6px 20px rgba(0,0,0,.4); }
         .extras-card .thumb { position: relative; aspect-ratio: 2/3; background: #1a1f35 center/cover no-repeat; }
         .extras-card .thumb .rel-tag {
-            position: absolute; top: 6px; left: 6px; padding: 2px 8px; border-radius: 6px;
+            position: absolute; top: 6px; right: 6px; padding: 2px 8px; border-radius: 6px;
             background: rgba(0,0,0,.65); color: #cfc9ff; font-size: 0.62rem; font-weight: 800; letter-spacing: .4px;
         }
         .extras-card .ec-title {
@@ -616,7 +610,6 @@
         }
         .extras-card:hover .ec-title { color: #fff; }
 
-        /* ============ RESPONSIVE (placed last so they override the base rules) ============ */
         @media (max-width: 768px) {
             .watch-container { padding: 12px; }
             .watch-header { gap: 10px; margin-bottom: 14px; }
@@ -628,7 +621,7 @@
             .ctrl.check label { font-size: 0.68rem; }
             .controls-left { gap: 4px; }
             .controls-right { gap: 4px; flex-wrap: wrap; }
-            .ctrl.check { padding: 4px 6px 4px 8px; }
+            .ctrl.check { padding: 4px 8px 4px 6px; }
             #player-wrapper { border-radius: 10px; }
             .info-sidebar { display: flex; align-items: stretch; }
             .info-sidebar .poster-wrap { width: 104px; aspect-ratio: auto; flex-shrink: 0; }
@@ -649,22 +642,16 @@
             .watch-body .main-col,
             .watch-body .ep-sidebar { width: 100%; max-width: 100%; }
             .w-synopsis { max-height: none; }
-            /* Miruro-style single-row player menu bar on mobile: the toggles
-               (Auto Play, Auto Skip, Auto Next) sit compactly on the left and
-               prev/next stay on the right. Let the bar wrap instead of
-               overflowing, and give every control a comfortable tap target. */
             #controls-bar { flex-wrap: wrap; justify-content: space-between; row-gap: 6px; }
             .controls-left { flex-wrap: nowrap; }
             .current-episode-info { display: none; }
-            /* Miruro hides the non-essential buttons on mobile; the player.html
-               iframe provides its own fullscreen + skip controls. */
             .ctrl.light, .ctrl.layout, .ctrl.expand { display: none; }
             .ctrl { padding: 7px 9px; font-size: 0.72rem; min-height: 38px; touch-action: manipulation; }
             .ctrl.forward { padding: 7px 11px; }
-            .ctrl.check { padding: 4px 6px 4px 8px; }
+            .ctrl.check { padding: 4px 8px 4px 6px; }
             .ctrl.check input[type="checkbox"] { width: 20px; height: 12px; border-radius: 7px; }
-            .ctrl.check input[type="checkbox"]::after { top: 1.5px; left: 1.5px; width: 9px; height: 9px; }
-            .ctrl.check input[type="checkbox"]:checked::after { transform: translateX(8px); }
+            .ctrl.check input[type="checkbox"]::after { top: 1.5px; right: 1.5px; width: 9px; height: 9px; }
+            .ctrl.check input[type="checkbox"]:checked::after { transform: translateX(-8px); }
             .ctrl.check label { font-size: 0.68rem; }
         }
         @media (max-width: 560px) {
@@ -689,318 +676,89 @@
                             <div id="menu">
                                 <ul>
                                     <li>
-                                        <a href="/home">Home</a>
+                                        <a href="/home">الرئيسية</a>
                                     </li>
                                     <li>
                                         <ul class="c4">
                                             <li>
                                                 <a href="/genre/action" title="Action">
-                                                    <h3>Action</h3>
+                                                    <h3>أكشن</h3>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/genre/adventure" title="Adventure">
-                                                    <h3>Adventure</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/boys-love" title="Boys Love">
-                                                    <h3>Boys Love</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/cars" title="Cars">
-                                                    <h3>Cars</h3>
+                                                    <h3>مغامرات</h3>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/genre/comedy" title="Comedy">
-                                                    <h3>Comedy</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/dementia" title="Dementia">
-                                                    <h3>Dementia</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/demons" title="Demons">
-                                                    <h3>Demons</h3>
+                                                    <h3>كوميدي</h3>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/genre/drama" title="Drama">
-                                                    <h3>Drama</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/ecchi" title="Ecchi">
-                                                    <h3>Ecchi</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/erotica" title="Erotica">
-                                                    <h3>Erotica</h3>
+                                                    <h3>دراما</h3>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/genre/fantasy" title="Fantasy">
-                                                    <h3>Fantasy</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/game" title="Game">
-                                                    <h3>Game</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/girls-love" title="Girls Love">
-                                                    <h3>Girls Love</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/gourmet" title="Gourmet">
-                                                    <h3>Gourmet</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/harem" title="Harem">
-                                                    <h3>Harem</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/historical" title="Historical">
-                                                    <h3>Historical</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/horror" title="Horror">
-                                                    <h3>Horror</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/isekai" title="Isekai">
-                                                    <h3>Isekai</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/josei" title="Josei">
-                                                    <h3>Josei</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/kids" title="Kids">
-                                                    <h3>Kids</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/magic" title="Magic">
-                                                    <h3>Magic</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/martial-arts" title="Martial Arts">
-                                                    <h3>Martial Arts</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/mecha" title="Mecha">
-                                                    <h3>Mecha</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/military" title="Military">
-                                                    <h3>Military</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/music" title="Music">
-                                                    <h3>Music</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/mystery" title="Mystery">
-                                                    <h3>Mystery</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/parody" title="Parody">
-                                                    <h3>Parody</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/police" title="Police">
-                                                    <h3>Police</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/psychological" title="Psychological">
-                                                    <h3>Psychological</h3>
+                                                    <h3>خيال</h3>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/genre/romance" title="Romance">
-                                                    <h3>Romance</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/samurai" title="Samurai">
-                                                    <h3>Samurai</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/school" title="School">
-                                                    <h3>School</h3>
+                                                    <h3>رومنسي</h3>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/genre/sci-fi" title="Sci-Fi">
-                                                    <h3>Sci-Fi</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/seinen" title="Seinen">
-                                                    <h3>Seinen</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/shoujo" title="Shoujo">
-                                                    <h3>Shoujo</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/shoujo-ai" title="Shoujo Ai">
-                                                    <h3>Shoujo Ai</h3>
+                                                    <h3>خيال علمي</h3>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/genre/shounen" title="Shounen">
-                                                    <h3>Shounen</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/shounen-ai" title="Shounen Ai">
-                                                    <h3>Shounen Ai</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/slice-of-life" title="Slice of Life">
-                                                    <h3>Slice of Life</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/space" title="Space">
-                                                    <h3>Space</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/sports" title="Sports">
-                                                    <h3>Sports</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/super-power" title="Super Power">
-                                                    <h3>Super Power</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/supernatural" title="Supernatural">
-                                                    <h3>Supernatural</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/suspense" title="Suspense">
-                                                    <h3>Suspense</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/thriller" title="Thriller">
-                                                    <h3>Thriller</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/unknown" title="unknown">
-                                                    <h3>unknown</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/genre/vampire" title="Vampire">
-                                                    <h3>Vampire</h3>
+                                                    <h3>شونين</h3>
                                                 </a>
                                             </li>
                                         </ul>
-                                        <a>Genre</a>
+                                        <a>التصنيفات</a>
                                     </li>
                                     <li>
                                         <ul class="c1">
                                             <li>
                                                 <a href="/type/movie" title="Movie">
-                                                    <h3>Movie</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/type/music" title="Music">
-                                                    <h3>Music</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/type/ona" title="ONA">
-                                                    <h3>ONA</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/type/ova" title="OVA">
-                                                    <h3>OVA</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/type/special" title="Special">
-                                                    <h3>Special</h3>
+                                                    <h3>فيلم</h3>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/type/tv" title="TV">
-                                                    <h3>TV</h3>
+                                                    <h3>تلفزيوني</h3>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/type/tv-short" title="TV_SHORT">
-                                                    <h3>TV_SHORT</h3>
+                                                <a href="/type/ova" title="OVA">
+                                                    <h3>أوفا</h3>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/type/tv-special" title="TV Special">
-                                                    <h3>TV Special</h3>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/type/unknown" title="unknown">
-                                                    <h3>unknown</h3>
+                                                <a href="/type/ona" title="ONA">
+                                                    <h3>أونا</h3>
                                                 </a>
                                             </li>
                                         </ul>
-                                        <a>Types</a>
+                                        <a>الأنواع</a>
                                     </li>
                                     <li>
-                                        <a href="/latest-updated" title="Updated">Updated</a>
+                                        <a href="/latest-updated" title="Updated">المحدثة</a>
                                     </li>
                                     <li>
-                                        <a href="/new-release" title="Added">Added</a>
+                                        <a href="/most-viewed" title="Most Viewed">الشائعة</a>
                                     </li>
                                     <li>
-                                        <a href="/most-viewed" title="Most Viewed">Popular</a>
+                                        <a href="/status/currently-airing" title="Ongoing">المستمرة</a>
                                     </li>
                                     <li>
-                                        <a href="/status/not-yet-aired" title="Upcoming">Upcoming</a>
-                                    </li>
-                                    <li>
-                                        <a href="/status/currently-airing" title="Ongoing">Ongoing</a>
-                                    </li>
-                                    <li>
-                                        <a href="/status/finished-airing" title="Finished">Finished</a>
-                                    </li>
-                                    <li class="mb">
-                                        <a href="/random">Random</a>
+                                        <a href="/status/finished-airing" title="Finished">المكتملة</a>
                                     </li>
                                 </ul>
                             </div>
@@ -1011,7 +769,7 @@
                             </div>
                             <div class="logo">
                                 <a href="/" class="brand-logo">
-                                    <span class="brand-txt">Anime</span><span class="brand-accent">Verse</span>
+                                    <span class="brand-txt">Anime</span><span class="brand-accent">Luther</span>
                                 </a>
                             </div>
                             <div id="search">
@@ -1019,18 +777,18 @@
                                     <button type="submit" aria-label="Search">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
-                                    <input type="text" name="q" placeholder="Search anime..." aria-label="Search anime"/>
+                                    <input type="text" name="q" placeholder="ابحث عن أنمي..." aria-label="Search anime"/>
                                     <button type="button" class="s-clear" aria-label="Clear search" tabindex="-1">
                                         <i class="fa-solid fa-xmark"></i>
                                     </button>
                                     <div class="search-popup">
-                                        <div class="s-close">Clear</div>
+                                        <div class="s-close">إغلاق</div>
                                         <div class="inner">
                                             <div class="body"><div class="items"></div></div>
                                             <div class="foot">
-                                                <span class="hint">Press <kbd>Enter</kbd> to see all results</span>
+                                                <span class="hint">اضغط <kbd>Enter</kbd> لعرض كل النتائج</span>
                                                 <a class="more" href="#" style="display: none">
-                                                    View all results <i class="fas fa-long-arrow-right"></i>
+                                                    عرض كل النتائج <i class="fas fa-long-arrow-left"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -1040,11 +798,11 @@
                         </div>
                         <div class="end d-flex justify-content-between">
                             <div id="quick-menu" class="d-flex justify-content-around">
-                                <a id="random-anime" href="/random" class="main-menu" data-toggle="tooltip" title="Watch a random anime">
+                                <a id="random-anime" href="/random" class="main-menu" data-toggle="tooltip" title="أنمي عشوائي">
                                     <svg class="icon">
                                         <use xlink:href="#icon-random"></use>
                                     </svg>
-                                    <span>Random</span>
+                                    <span>عشوائي</span>
                                 </a>
                                 <div id="lang">
                                     <div class="settings-options switch" data-switch="title_lang" data-persist="true">
@@ -1067,47 +825,15 @@
                 </div>
             </header>
         <svg class="d-none">
-            <symbol id="icon-search-shortcut" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.47 26.875">
-                <path d="M1599.25,69.947h-15.1a6.165,6.165,0,0,0-6.18,6.14V90.66a6.165,6.165,0,0,0,6.18,6.14h15.1a6.165,6.165,0,0,0,6.18-6.14V76.086A6.165,6.165,0,0,0,1599.25,69.947Zm-19.45,6.14a4.339,4.339,0,0,1,4.35-4.32h15.1a4.339,4.339,0,0,1,4.35,4.32v10.74a4.339,4.339,0,0,1-4.35,4.32h-15.1a4.339,4.339,0,0,1-4.35-4.32V76.086Zm19.45,18.894h-15.1a4.343,4.343,0,0,1-4.31-3.76,6.184,6.184,0,0,0,4.31,1.745h15.1a6.183,6.183,0,0,0,4.31-1.746A4.344,4.344,0,0,1,1599.25,94.98Zm-5.88-10.235a2.583,2.583,0,0,1-1.47.316,6.074,6.074,0,0,1-1.36-.154,4.726,4.726,0,0,1-1.27-.477,0.9,0.9,0,0,0-.61-0.1,0.8,0.8,0,0,0-.46.281,1.1,1.1,0,0,0-.21.5,1.077,1.077,0,0,0,.09.555,1.04,1.04,0,0,0,.44.443,4.778,4.778,0,0,0,1,.421,8.131,8.131,0,0,0,1.17.26,8.276,8.276,0,0,0,1.21.091,6.022,6.022,0,0,0,1.68-.218,3.934,3.934,0,0,0,1.29-.625,2.715,2.715,0,0,0,.81-0.976,2.8,2.8,0,0,0,.29-1.27,2.291,2.291,0,0,0-.68-1.721,4.177,4.177,0,0,0-2.06-.948l-1.6-.337a2.4,2.4,0,0,1-1.03-.407,0.821,0.821,0,0,1-.3-0.66,1.06,1.06,0,0,1,.22-0.646,1.427,1.427,0,0,1,.64-0.436,2.88,2.88,0,0,1,1.01-.154,5.169,5.169,0,0,1,1.07.112,4.012,4.012,0,0,1,.99.351,1.033,1.033,0,0,0,.65.127,0.761,0.761,0,0,0,.44-0.253,0.881,0.881,0,0,0,.22-0.457,1.042,1.042,0,0,0-.07-0.519,0.884,0.884,0,0,0-.39-0.428,4.7,4.7,0,0,0-1.34-.555,6.476,6.476,0,0,0-1.56-.19,5.609,5.609,0,0,0-1.63.225,3.932,3.932,0,0,0-1.28.646,3.01,3.01,0,0,0-.83,1,2.729,2.729,0,0,0-.3,1.278,2.465,2.465,0,0,0,.66,1.791,3.812,3.812,0,0,0,2.01.962l1.6,0.337a2.767,2.767,0,0,1,1.08.408,0.772,0.772,0,0,1,.32.646A0.954,0.954,0,0,1,1593.37,84.745Z" transform="translate(-1577.97 -69.938)"></path>
-            </symbol>
             <symbol id="icon-random" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.28 26.281">
                 <path d="M2056.22,92.021c-1.06,0-2.09,0-3.11,0a9.006,9.006,0,0,1-1.26-.041,2.907,2.907,0,0,1-1.98-1.309c-0.46-.674-0.83-1.415-1.23-2.131a6.668,6.668,0,0,1-.31-0.679c-0.13.3-.22,0.5-0.31,0.706a8.488,8.488,0,0,1-1.59,2.523,2.917,2.917,0,0,1-2.2.936c-1.23-.018-2.47,0-3.7-0.005a1.638,1.638,0,1,1,0-3.275c1.1,0,2.21-.016,3.31.009a0.685,0.685,0,0,0,.73-0.413c0.44-.962.88-1.92,1.27-2.9,0.29-.716.51-1.463,0.75-2.2a0.739,0.739,0,0,0,.02-0.388q-0.855-2.31-1.72-4.612l-0.03-.075a1.247,1.247,0,0,0-1.42-.913c-0.96.081-1.94,0.022-2.91,0.018a1.638,1.638,0,1,1,0-3.275c1.22,0,2.44.018,3.66-.007a2.979,2.979,0,0,1,2.38,1.081,8.773,8.773,0,0,1,1.67,2.9c0.72,1.99,1.36,4.01,2.08,6,0.48,1.353,1.04,2.68,1.56,4.016a1.089,1.089,0,0,0,1.22.771c1.02-.064,2.04-0.017,3.12-0.017,0-.845-0.01-1.658.01-2.472a1.553,1.553,0,0,1,1.74-1.6,2.6,2.6,0,0,1,1.05.52c0.59,0.441,1.13.941,1.69,1.42,0.8,0.688,1.59,1.377,2.39,2.069,0.14,0.123.28,0.251,0.41,0.386a1.684,1.684,0,0,1,0,2.614c-1.02.966-2.1,1.865-3.16,2.778a17.4,17.4,0,0,1-1.74,1.4,1.554,1.554,0,0,1-2.39-1.4V92.021Zm0-14.749c-1.26,0-2.47-.009-3.67.013a0.565,0.565,0,0,0-.39.293c-0.37.736-.71,1.485-1.06,2.232-0.08.169-.14,0.348-0.24,0.612-0.08-.179-0.13-0.278-0.17-0.379-0.44-1.15-.89-2.3-1.32-3.456a0.694,0.694,0,0,1,.03-0.548,3.714,3.714,0,0,1,2.38-1.994,2.961,2.961,0,0,1,.58-0.051c1.14,0,2.27,0,3.4,0h0.46c0-.79.01-1.537,0-2.284a1.68,1.68,0,0,1,.86-1.627,1.438,1.438,0,0,1,1.73.2c1.24,1.032,2.47,2.087,3.69,3.136,0.34,0.286.68,0.571,0.99,0.885a1.692,1.692,0,0,1-.02,2.67c-1.01.953-2.08,1.842-3.13,2.745a17.165,17.165,0,0,1-1.74,1.4,1.554,1.554,0,0,1-2.38-1.415V77.272Z" transform="translate(-2038.88 -69.875)"></path>
-            </symbol>
-            <symbol id="icon-forum" fill="currentColor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" viewBox="0 0 172.53 120.37">
-                <path d="M74.33,0C33.26,0,0,24.88,0,55.59c0,18.32,11.9,34.61,30.23,44.72c-1.79,6.25-5.97,14.01-15.63,19.46 c0,0,18.25,4.66,33.78-12.11c8.07,2.24,16.84,3.49,25.98,3.49c41.06,0,74.33-24.88,74.33-55.56C148.69,24.91,115.39,0,74.33,0z M103.32,64.58L64.11,87.22c-6.13,3.54-13.79-0.88-13.79-7.96V33.98c0-7.08,7.66-11.5,13.79-7.96l39.21,22.64 C109.45,52.2,109.45,61.04,103.32,64.58z"></path>
-                <path d="M154.93,105.66c10.7-5.9,17.6-15.39,17.6-26.05c0-9.72-5.77-18.45-14.86-24.39c0,0.12,0.01,0.25,0.01,0.37 c0,17.75-9.01,34.26-25.38,46.49c-4.48,3.35-9.39,6.26-14.61,8.71c3.67,0.76,7.52,1.18,11.49,1.18c5.31,0,10.42-0.72,15.15-2.04 c9.04,9.77,19.67,7.04,19.67,7.04C158.39,113.84,155.97,109.28,154.93,105.66z"></path>
-            </symbol>
-            <symbol id="icon-tip-filter" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.43 17.438">
-                <defs></defs>
-                <path d="M1666.63,124.643c-4.18,0-8.74.873-8.74,2.806v2.806a0.5,0.5,0,0,0,.19.437l6.05,4.8v5.987a0.766,0.766,0,0,0,.31.561,0.482,0.482,0,0,0,.31.062,0.3,0.3,0,0,0,.25-0.062l4.37-2.5a0.7,0.7,0,0,0,.37-0.561v-3.492l5.43-4.8a0.7,0.7,0,0,0,.19-0.437v-2.806C1675.36,125.516,1670.8,124.643,1666.63,124.643Zm0,1.247c4.98,0,7.42,1.123,7.48,1.559-0.06.437-2.5,1.559-7.48,1.559s-7.43-1.122-7.49-1.559C1659.2,127.013,1661.64,125.89,1666.63,125.89Z" transform="translate(-1657.91 -124.656)"></path>
-            </symbol>
-            <symbol id="icon-tip-arrow-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.22 27">
-                <path d="M1050.84,704.005h-14.15a6.509,6.509,0,0,0-6.52,6.476V724.52a6.509,6.509,0,0,0,6.52,6.476h14.15a6.511,6.511,0,0,0,6.53-6.476V710.481A6.511,6.511,0,0,0,1050.84,704.005Zm-18.81,6.476a4.648,4.648,0,0,1,4.66-4.626h14.15a4.657,4.657,0,0,1,4.67,4.626v9.3a4.656,4.656,0,0,1-4.67,4.625h-14.15a4.648,4.648,0,0,1-4.66-4.625v-9.3Zm23.48,14.039a4.657,4.657,0,0,1-4.67,4.626h-14.15a4.648,4.648,0,0,1-4.66-4.626v-0.211a6.541,6.541,0,0,0,4.66,1.952h14.15a6.547,6.547,0,0,0,4.67-1.952v0.211Zm-12.12-15.3h0.66a0.923,0.923,0,0,1,.93.925V717.3a0.923,0.923,0,0,1-.93.925h-0.66a0.93,0.93,0,0,1-.93-0.925V710.14A0.93,0.93,0,0,1,1043.39,709.215Zm1.52,10.65-0.47.464a0.928,0.928,0,0,1-1.31,0l-3.06-3.033a0.911,0.911,0,0,1,0-1.309l0.47-.463a0.926,0.926,0,0,1,1.31,0l3.06,3.033A0.909,0.909,0,0,1,1044.91,719.865Zm-1.82.464-0.46-.464a0.909,0.909,0,0,1,0-1.308l3.05-3.033a0.938,0.938,0,0,1,1.32,0l0.47,0.463a0.928,0.928,0,0,1,0,1.309l-3.06,3.033A0.94,0.94,0,0,1,1043.09,720.329Z" transform="translate(-1030.16 -704)"></path>
-            </symbol>
-            <symbol id="icon-tip-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.19 27">
-                <path d="M1082.48,704.005h-14.15a6.511,6.511,0,0,0-6.53,6.476V724.52a6.511,6.511,0,0,0,6.53,6.476h14.15a6.511,6.511,0,0,0,6.53-6.476V710.481A6.511,6.511,0,0,0,1082.48,704.005Zm-18.81,6.476a4.648,4.648,0,0,1,4.66-4.626h14.15a4.648,4.648,0,0,1,4.66,4.626v9.3a4.648,4.648,0,0,1-4.66,4.625h-14.15a4.648,4.648,0,0,1-4.66-4.625v-9.3Zm23.47,14.039a4.648,4.648,0,0,1-4.66,4.626h-14.15a4.648,4.648,0,0,1-4.66-4.626v-0.211a6.523,6.523,0,0,0,4.66,1.952h14.15a6.506,6.506,0,0,0,4.66-1.952v0.211Zm-11.36-4.056h-0.66a0.93,0.93,0,0,1-.93-0.925v-7.157a0.93,0.93,0,0,1,.93-0.925h0.66a0.932,0.932,0,0,1,.94.925v7.157A0.932,0.932,0,0,1,1075.78,720.464Zm-1.52-10.65,0.47-.464a0.94,0.94,0,0,1,1.32,0l3.06,3.034a0.927,0.927,0,0,1,0,1.308l-0.47.463a0.938,0.938,0,0,1-1.32,0l-3.06-3.033A0.927,0.927,0,0,1,1074.26,709.814Zm1.82-.464,0.47,0.464a0.927,0.927,0,0,1,0,1.308l-3.06,3.033a0.938,0.938,0,0,1-1.32,0l-0.46-.463a0.909,0.909,0,0,1,0-1.308l3.05-3.034A0.94,0.94,0,0,1,1076.08,709.35Z" transform="translate(-1061.81 -704)"></path>
-            </symbol>
-            <symbol id="icon-tip-enter" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.19 27">
-                <path d="M1246.68,704.005h-14.15a6.511,6.511,0,0,0-6.53,6.476V724.52a6.511,6.511,0,0,0,6.53,6.476h14.15a6.509,6.509,0,0,0,6.52-6.476V710.481A6.509,6.509,0,0,0,1246.68,704.005Zm-18.81,6.476a4.648,4.648,0,0,1,4.66-4.626h14.15a4.648,4.648,0,0,1,4.66,4.626v9.3a4.648,4.648,0,0,1-4.66,4.625h-14.15a4.648,4.648,0,0,1-4.66-4.625v-9.3Zm23.47,14.039a4.648,4.648,0,0,1-4.66,4.626h-14.15a4.648,4.648,0,0,1-4.66-4.626v-0.211a6.506,6.506,0,0,0,4.66,1.952h14.15a6.541,6.541,0,0,0,4.66-1.952v0.211Zm-6.68-7.2v0.655a0.93,0.93,0,0,1-.93.925h-7.22a0.93,0.93,0,0,1-.93-0.925v-0.655a0.931,0.931,0,0,1,.93-0.926h7.22A0.931,0.931,0,0,1,1244.66,717.317Zm-0.93,1.58h-0.66a0.932,0.932,0,0,1-.94-0.925v-8.279a0.933,0.933,0,0,1,.94-0.925h0.66a0.93,0.93,0,0,1,.93.925v8.279A0.93,0.93,0,0,1,1243.73,718.9Zm-9.8-.072-0.47-.463a0.909,0.909,0,0,1,0-1.308l3.05-3.034a0.94,0.94,0,0,1,1.32,0l0.47,0.464a0.927,0.927,0,0,1,0,1.308l-3.06,3.033A0.928,0.928,0,0,1,1233.93,718.825Zm-0.47-1.8,0.47-.463a0.928,0.928,0,0,1,1.31,0l3.06,3.033a0.928,0.928,0,0,1,0,1.309l-0.47.463a0.94,0.94,0,0,1-1.32,0l-3.05-3.033A0.911,0.911,0,0,1,1233.46,717.021Z" transform="translate(-1226 -704)"></path>
-            </symbol>
-            <symbol id="icon-tip-esc" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.12 27.125">
-                <path d="M1388.55,731.083h-14.1a6.514,6.514,0,0,1-6.51-6.5v-14.1a6.515,6.515,0,0,1,6.51-6.5h14.1a6.506,6.506,0,0,1,6.5,6.5v14.1A6.506,6.506,0,0,1,1388.55,731.083Zm-14.1-25.253a4.656,4.656,0,0,0-4.65,4.646v14.1a4.656,4.656,0,0,0,4.65,4.646h14.1a4.656,4.656,0,0,0,4.65-4.646v-14.1a4.656,4.656,0,0,0-4.65-4.646h-14.1Zm14.1,20.5h-14.1a6.515,6.515,0,0,1-6.51-6.5v-9.346a6.515,6.515,0,0,1,6.51-6.5h14.1a6.506,6.506,0,0,1,6.5,6.5v9.346A6.506,6.506,0,0,1,1388.55,726.327Zm-14.1-20.5a4.656,4.656,0,0,0-4.65,4.646v9.346a4.656,4.656,0,0,0,4.65,4.646h14.1a4.656,4.656,0,0,0,4.65-4.646v-9.346a4.656,4.656,0,0,0-4.65-4.646h-14.1Zm-1.47,13.774a1.061,1.061,0,0,1-.79-0.269,1.025,1.025,0,0,1-.28-0.781l-0.01-5.707a0.952,0.952,0,0,1,1.06-1.055l3.76-.009a0.8,0.8,0,0,1,.59.2,0.757,0.757,0,0,1,.21.576,0.834,0.834,0,0,1-.2.594,0.8,0.8,0,0,1-.6.205l-2.87.008v1.485l2.63-.007a0.792,0.792,0,0,1,.59.2,0.771,0.771,0,0,1,.21.587,0.812,0.812,0,0,1-.2.588,0.838,0.838,0,0,1-.6.2l-2.62.007v1.607l2.87-.007a0.787,0.787,0,0,1,.6.2,0.808,0.808,0,0,1,.2.581,0.769,0.769,0,0,1-.2.587,0.806,0.806,0,0,1-.6.2Zm8.09,0.1a7.305,7.305,0,0,1-.93-0.059,6.107,6.107,0,0,1-.91-0.181,4.625,4.625,0,0,1-.78-0.286,0.858,0.858,0,0,1-.42-0.381,0.879,0.879,0,0,1-.09-0.5,0.892,0.892,0,0,1,.19-0.471,0.752,0.752,0,0,1,.41-0.279,0.819,0.819,0,0,1,.57.071,4.21,4.21,0,0,0,.96.308,4.787,4.787,0,0,0,.99.109,2,2,0,0,0,1.03-.2,0.578,0.578,0,0,0,.29-0.484,0.484,0.484,0,0,0-.21-0.409,1.838,1.838,0,0,0-.72-0.264l-1.3-.274a2.952,2.952,0,0,1-1.59-.772,2.031,2.031,0,0,1-.52-1.428,2.277,2.277,0,0,1,.24-1.048,2.236,2.236,0,0,1,.67-0.8,3.268,3.268,0,0,1,1.04-.517,4.618,4.618,0,0,1,1.35-.186,5.612,5.612,0,0,1,1.17.124,3.462,3.462,0,0,1,1.02.38,0.827,0.827,0,0,1,.37.365,1,1,0,0,1,.09.481,0.836,0.836,0,0,1-.17.438,0.7,0.7,0,0,1-.4.251,0.95,0.95,0,0,1-.59-0.082,3.216,3.216,0,0,0-.73-0.214,4.449,4.449,0,0,0-.78-0.07,2.23,2.23,0,0,0-.7.1,0.971,0.971,0,0,0-.44.273,0.616,0.616,0,0,0-.15.41,0.528,0.528,0,0,0,.2.393,1.75,1.75,0,0,0,.72.27l1.28,0.274a3.182,3.182,0,0,1,1.61.761,1.894,1.894,0,0,1,.54,1.384,2.243,2.243,0,0,1-.24,1.042,2.162,2.162,0,0,1-.66.793,3.153,3.153,0,0,1-1.04.507A4.857,4.857,0,0,1,1381.07,719.707Zm7.81-.019a4.67,4.67,0,0,1-2.23-.493,3.432,3.432,0,0,1-1.43-1.4,4.372,4.372,0,0,1-.49-2.126,4.58,4.58,0,0,1,.27-1.652,3.5,3.5,0,0,1,2.13-2.094,4.966,4.966,0,0,1,1.73-.286,5.036,5.036,0,0,1,1.06.113,3.423,3.423,0,0,1,.97.347,0.922,0.922,0,0,1,.43.42,0.951,0.951,0,0,1,.09.521,1.033,1.033,0,0,1-.2.477,0.693,0.693,0,0,1-.93.212,3.793,3.793,0,0,0-.66-0.237,2.652,2.652,0,0,0-.68-0.081,2.257,2.257,0,0,0-1.14.263,1.608,1.608,0,0,0-.69.761,2.694,2.694,0,0,0-.23,1.23,3.018,3.018,0,0,0,.23,1.235,1.663,1.663,0,0,0,.7.764,2.284,2.284,0,0,0,1.14.257,2.814,2.814,0,0,0,.62-0.074,3.079,3.079,0,0,0,.66-0.228,0.906,0.906,0,0,1,.59-0.079,0.785,0.785,0,0,1,.42.264,0.97,0.97,0,0,1,.21.46,0.865,0.865,0,0,1-.48.927,3.3,3.3,0,0,1-.95.367A4.988,4.988,0,0,1,1388.88,719.688Z" transform="translate(-1367.94 -703.969)"></path>
-            </symbol>
-            <symbol id="icon-list-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.96 16.937">
-                <path d="M2812.18,416.314h-3.1a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.231h3.1a1.219,1.219,0,0,1,1.21,1.231v2.146A1.219,1.219,0,0,1,2812.18,416.314Zm7.23,0h-3.1a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.231h3.1a1.219,1.219,0,0,1,1.21,1.231v2.146A1.219,1.219,0,0,1,2819.41,416.314Zm7.24,0h-3.11a1.226,1.226,0,0,1-1.21-1.231v-2.146a1.226,1.226,0,0,1,1.21-1.231h3.11a1.226,1.226,0,0,1,1.21,1.231v2.146A1.226,1.226,0,0,1,2826.65,416.314Zm-14.47,6.171h-3.1a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.23h3.1a1.219,1.219,0,0,1,1.21,1.23v2.146A1.219,1.219,0,0,1,2812.18,422.485Zm7.23,0h-3.1a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.23h3.1a1.219,1.219,0,0,1,1.21,1.23v2.146A1.219,1.219,0,0,1,2819.41,422.485Zm7.24,0h-3.11a1.226,1.226,0,0,1-1.21-1.231v-2.146a1.226,1.226,0,0,1,1.21-1.23h3.11a1.226,1.226,0,0,1,1.21,1.23v2.146A1.226,1.226,0,0,1,2826.65,422.485Zm-14.47,6.171h-3.1a1.219,1.219,0,0,1-1.21-1.23V425.28a1.219,1.219,0,0,1,1.21-1.231h3.1a1.219,1.219,0,0,1,1.21,1.231v2.146A1.219,1.219,0,0,1,2812.18,428.656Zm7.23,0h-3.1a1.219,1.219,0,0,1-1.21-1.23V425.28a1.219,1.219,0,0,1,1.21-1.231h3.1a1.219,1.219,0,0,1,1.21,1.231v2.146A1.219,1.219,0,0,1,2819.41,428.656Zm7.24,0h-3.11a1.226,1.226,0,0,1-1.21-1.23V425.28a1.226,1.226,0,0,1,1.21-1.231h3.11a1.226,1.226,0,0,1,1.21,1.231v2.146A1.226,1.226,0,0,1,2826.65,428.656Z" transform="translate(-2807.88 -411.719)"></path>
-            </symbol>
-            <symbol id="icon-list-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.96 16.937">
-                <path d="M2884.8,416.314h-6.72a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.231h6.72a1.219,1.219,0,0,1,1.21,1.231v2.146A1.219,1.219,0,0,1,2884.8,416.314Zm10.85,0h-6.72a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.231h6.72a1.226,1.226,0,0,1,1.21,1.231v2.146A1.226,1.226,0,0,1,2895.65,416.314Zm-10.85,6.171h-6.72a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.23h6.72a1.219,1.219,0,0,1,1.21,1.23v2.146A1.219,1.219,0,0,1,2884.8,422.485Zm10.85,0h-6.72a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.23h6.72a1.226,1.226,0,0,1,1.21,1.23v2.146A1.226,1.226,0,0,1,2895.65,422.485Zm-10.85,6.171h-6.72a1.219,1.219,0,0,1-1.21-1.23V425.28a1.219,1.219,0,0,1,1.21-1.231h6.72a1.219,1.219,0,0,1,1.21,1.231v2.146A1.219,1.219,0,0,1,2884.8,428.656Zm10.85,0h-6.72a1.219,1.219,0,0,1-1.21-1.23V425.28a1.219,1.219,0,0,1,1.21-1.231h6.72a1.226,1.226,0,0,1,1.21,1.231v2.146A1.226,1.226,0,0,1,2895.65,428.656Z" transform="translate(-2876.88 -411.719)"></path>
-            </symbol>
-            <symbol id="icon-list-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.96 16.937">
-                <path d="M2847.18,416.314h-3.1a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.231h3.1a1.219,1.219,0,0,1,1.21,1.231v2.146A1.219,1.219,0,0,1,2847.18,416.314Zm14.47,0h-10.34a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.231h10.34a1.226,1.226,0,0,1,1.21,1.231v2.146A1.226,1.226,0,0,1,2861.65,416.314Zm-14.47,6.171h-3.1a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.23h3.1a1.219,1.219,0,0,1,1.21,1.23v2.146A1.219,1.219,0,0,1,2847.18,422.485Zm14.47,0h-10.34a1.219,1.219,0,0,1-1.21-1.231v-2.146a1.219,1.219,0,0,1,1.21-1.23h10.34a1.226,1.226,0,0,1,1.21,1.23v2.146A1.226,1.226,0,0,1,2861.65,422.485Zm-14.47,6.171h-3.1a1.219,1.219,0,0,1-1.21-1.23V425.28a1.219,1.219,0,0,1,1.21-1.231h3.1a1.219,1.219,0,0,1,1.21,1.231v2.146A1.219,1.219,0,0,1,2847.18,428.656Zm14.47,0h-10.34a1.219,1.219,0,0,1-1.21-1.23V425.28a1.219,1.219,0,0,1,1.21-1.231h10.34a1.226,1.226,0,0,1,1.21,1.231v2.146A1.226,1.226,0,0,1,2861.65,428.656Z" transform="translate(-2842.88 -411.719)"></path>
             </symbol>
         </svg>
 <div class="watch-container">
     <div class="watch-header">
-        <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+        <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
         <div>
-            <h1 id="pageTitle">Loading anime...</h1>
+            <h1 id="pageTitle">جاري تحميل الأنمي...</h1>
             <div class="slug-info" id="slugInfo"></div>
         </div>
     </div>
@@ -1117,49 +843,48 @@
             <div id="player-wrapper">
                 <div class="loading-overlay" id="loadingOverlay">
                     <div class="spinner"></div>
-                    <span>Loading video...</span>
+                    <span>جاري تحميل الفيديو...</span>
                 </div>
                 <iframe id="playerFrame" allow="autoplay; fullscreen" allowfullscreen></iframe>
             </div>
 
             <div id="controls-bar">
-                <button class="ctrl forward prev" id="prevEpBtn" title="Previous Episode" onclick="changeEpisode(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="ctrl forward prev" id="prevEpBtn" title="الحلقة السابقة" onclick="changeEpisode(1)"><i class="fas fa-chevron-right"></i></button>
 
                 <div class="controls-left">
-                    <div class="ctrl expand" id="ctrlExpand" title="Fullscreen Player" onclick="expandPlayer()"><i class="fas fa-expand"></i></div>
-                    <div class="ctrl check" title="Start playing automatically">
+                    <div class="ctrl expand" id="ctrlExpand" title="ملء الشاشة" onclick="expandPlayer()"><i class="fas fa-expand"></i></div>
+                    <div class="ctrl check" title="التشغيل التلقائي">
                         <input type="checkbox" id="autoPlayChk">
-                        <label for="autoPlayChk">Auto Play</label>
+                        <label for="autoPlayChk">تشغيل تلقائي</label>
                     </div>
-                    <div class="ctrl check auto-skip" title="Automatically skip the intro & outro">
+                    <div class="ctrl check auto-skip" title="تخطى المقدمة والنهاية تلقائياً">
                         <input type="checkbox" id="autoSkipChk">
-                        <label for="autoSkipChk">Auto Skip</label>
+                        <label for="autoSkipChk">تخطي تلقائي</label>
                     </div>
-                    <div class="ctrl check" title="Automatically play the next episode">
+                    <div class="ctrl check" title="تشغيل الحلقة التالية تلقائياً">
                         <input type="checkbox" id="autoNextChk">
-                        <label for="autoNextChk">Auto Next</label>
+                        <label for="autoNextChk">التالي تلقائياً</label>
                     </div>
 
-                    <div class="ctrl light" id="ctrlLight" title="Toggle Light Mode" onclick="toggleLight()"><i class="fas fa-sun"></i></div>
+                    <div class="ctrl light" id="ctrlLight" title="تبديل وضع الإضاءة" onclick="toggleLight()"><i class="fas fa-sun"></i></div>
                 </div>
 
                 <div class="current-episode-info">
-                    <div class="current-episode-name" id="currentEpName">Episode —</div>
+                    <div class="current-episode-name" id="currentEpName">الحلقة —</div>
                     <div class="current-episode-type" id="currentEpType"></div>
                 </div>
 
                 <div class="controls-right">
-                    <div class="ctrl layout" id="ctrlLayout" title="Toggle Theater Layout" onclick="toggleLayout()"><i class="fas fa-columns"></i></div>
+                    <div class="ctrl layout" id="ctrlLayout" title="تغيير وضع العرض" onclick="toggleLayout()"><i class="fas fa-columns"></i></div>
                 </div>
 
-                <button class="ctrl forward next" id="nextEpBtn" title="Next Episode" onclick="changeEpisode(1)"><i class="fas fa-chevron-right"></i></button>
+                <button class="ctrl forward next" id="nextEpBtn" title="الحلقة التالية" onclick="changeEpisode(-1)"><i class="fas fa-chevron-left"></i></button>
             </div>
 
-            <!-- ============ AnimeX-style "You are watching" header ============ -->
             <div class="watch-head">
                 <div class="watch-head-title">
                     <span class="wh-num" id="whEpNum">EP —</span>
-                    <h2 id="whTitle">Loading anime...</h2>
+                    <h2 id="whTitle">جاري تحميل الأنمي...</h2>
                 </div>
                 <div class="watch-head-links">
                     <a class="external-link" id="anilistLink" href="#" target="_blank" rel="noopener" title="AniList"><i class="fas fa-globe"></i> AniList</a>
@@ -1167,10 +892,9 @@
                 </div>
             </div>
 
-            <!-- ============ AnimeX-style "Switch Player" dropdown ============ -->
             <div class="panel server-panel" id="serverPanel">
                 <div class="panel-head">
-                    <h2><i class="fas fa-server"></i> Switch Player</h2>
+                    <h2><i class="fas fa-server"></i> تبديل السيرفر</h2>
                     <span class="ep-count" id="svCount">—</span>
                 </div>
                 <div class="server-body">
@@ -1179,10 +903,10 @@
                     <div id="animexList"></div>
                     <div id="customEmbedList">
                         <div class="server-section" style="margin-top:6px">
-                            <div class="server-type-label">CUSTOM EMBED</div>
+                            <div class="server-type-label">رابط مخصص</div>
                             <div class="server-list">
                                 <div class="sv-btn embed" onclick="showCustomEmbedInput()">
-                                    <i class="fas fa-link" style="margin-right:4px;font-size:0.7rem"></i> Load URL
+                                    <i class="fas fa-link" style="margin-left:4px;font-size:0.7rem"></i> تحميل رابط
                                 </div>
                             </div>
                         </div>
@@ -1195,7 +919,7 @@
             <div class="main-col">
                 <div class="panel ep-panel" id="episodePanel">
                     <div class="ep-panel-head">
-                        <h2><i class="fas fa-list"></i> Episodes</h2>
+                        <h2><i class="fas fa-list"></i> الحلقات</h2>
                         <span class="ep-count" id="epCount">—</span>
                     </div>
                     <div class="ep-next-banner" id="nextEpBanner" style="display:none">
@@ -1204,17 +928,17 @@
                     </div>
                     <div class="ep-meta" id="epMeta"></div>
                     <div class="ep-toolbar">
-                        <select class="ep-range-select" id="epRangeSelect" title="Jump to episode range"></select>
+                        <select class="ep-range-select" id="epRangeSelect" title="الانتقال لنطاق الحلقات"></select>
                         <div class="ep-filter">
                             <i class="fas fa-search"></i>
-                            <input id="epFilterInput" type="text" placeholder="Filter episodes..." autocomplete="off">
+                            <input id="epFilterInput" type="text" placeholder="البحث في الحلقات..." autocomplete="off">
                         </div>
-                        <button class="ep-tool-btn" id="epSpoilerBtn" title="Toggle Spoilers"><i class="fas fa-eye-slash"></i></button>
-                        <button class="ep-tool-btn" id="epLayoutBtn" title="Toggle layout"><i class="fas fa-th-large"></i></button>
+                        <button class="ep-tool-btn" id="epSpoilerBtn" title="إخفاء/إظهار الحرق"><i class="fas fa-eye-slash"></i></button>
+                        <button class="ep-tool-btn" id="epLayoutBtn" title="تغيير العرض"><i class="fas fa-th-large"></i></button>
                     </div>
                     <div class="episode-grid" id="episodeGrid">
                         <div class="loading-text" style="grid-column:1/-1;padding:20px 0;text-align:center;">
-                            <i class="fas fa-spinner fa-spin"></i> Loading episodes...
+                            <i class="fas fa-spinner fa-spin"></i> جاري تحميل الحلقات...
                         </div>
                     </div>
                     <div class="ep-list-footer" id="epListFooter" style="display:none">
@@ -1224,19 +948,17 @@
                 </div>
 
                 <div class="panel synopsis-panel">
-                    <h2><i class="fas fa-align-left"></i> Synopsis</h2>
-                    <div class="w-synopsis" id="infoSynopsis">Loading synopsis...</div>
+                    <h2><i class="fas fa-align-left"></i> القصة والنبذة</h2>
+                    <div class="w-synopsis" id="infoSynopsis">جاري تحميل النبذة...</div>
                 </div>
 
-                <!-- ============ Related Anime (animex-style) ============ -->
                 <div class="panel extras-panel" id="relatedPanel" style="display:none">
-                    <h2><i class="fas fa-share-alt"></i> Related Anime</h2>
+                    <h2><i class="fas fa-share-alt"></i> أنميات ذات صلة</h2>
                     <div class="extras-grid" id="relatedGrid"></div>
                 </div>
 
-                <!-- ============ Recommendations (animex-style) ============ -->
                 <div class="panel extras-panel" id="recPanel" style="display:none">
-                    <h2><i class="fas fa-thumbs-up"></i> Recommendations</h2>
+                    <h2><i class="fas fa-thumbs-up"></i> توصيات مقترحة</h2>
                     <div class="extras-grid" id="recGrid"></div>
                 </div>
             </div>
@@ -1252,19 +974,19 @@
                         <div class="w-genres" id="infoGenres"></div>
                         <div class="w-meta" id="infoMeta2" style="display:none"></div>
                         <div class="trailer-row" style="display:none;margin-top:10px">
-                            <button class="trailer-btn" id="trailerBtn" type="button" onclick="openTrailer()"><i class="fas fa-play"></i> Watch Trailer</button>
+                            <button class="trailer-btn" id="trailerBtn" type="button" onclick="openTrailer()"><i class="fas fa-play"></i> مشاهدة الإعلان</button>
                         </div>
                         <div class="list-ctl" id="listCtl">
                             <button class="list-btn" id="listBtn" type="button">
-                                <i class="fas fa-plus"></i> <span>Add to My List</span>
+                                <i class="fas fa-plus"></i> <span>إضافة لقائمتي</span>
                             </button>
                             <div class="list-menu" id="listMenu">
-                                <div class="list-menu-item" data-status="watching"><i class="fas fa-play-circle"></i> Watching</div>
-                                <div class="list-menu-item" data-status="planning"><i class="fas fa-clock"></i> Planning</div>
-                                <div class="list-menu-item" data-status="completed"><i class="fas fa-check-circle"></i> Completed</div>
-                                <div class="list-menu-item" data-status="on_hold"><i class="fas fa-pause-circle"></i> On Hold</div>
-                                <div class="list-menu-item" data-status="dropped"><i class="fas fa-times-circle"></i> Dropped</div>
-                                <div class="list-menu-item remove" data-status=""><i class="fas fa-trash-alt"></i> Remove from list</div>
+                                <div class="list-menu-item" data-status="watching"><i class="fas fa-play-circle"></i> أتابعها</div>
+                                <div class="list-menu-item" data-status="planning"><i class="fas fa-clock"></i> تخطط لمشاهدتها</div>
+                                <div class="list-menu-item" data-status="completed"><i class="fas fa-check-circle"></i> مكتمل</div>
+                                <div class="list-menu-item" data-status="on_hold"><i class="fas fa-pause-circle"></i> متوقف مؤقتاً</div>
+                                <div class="list-menu-item" data-status="dropped"><i class="fas fa-times-circle"></i> تم إفلاته</div>
+                                <div class="list-menu-item remove" data-status=""><i class="fas fa-trash-alt"></i> إزالة من القائمة</div>
                             </div>
                         </div>
                     </div>
@@ -1280,29 +1002,23 @@
             <div class="col-lg-5">
                 <div class="logos">
                     <div class="logo">
-                        <img src='img/logo.webp' alt='AnimeVerse'/>
+                        <img src='img/logo.webp' alt='AnimeLuther'/>
                     </div>
                 </div>
-                <div class="copyright">&copy; <span id="year">2026</span> AnimeVerse &middot; Made by <strong>King A</strong> <span class="version-badge">v1.1.2</span></div>
-                <div class="disclaimer">This site does not store any files on its server. All contents are provided by non-affiliated third parties. <a href="/pages/dmca" rel="nofollow">Copyright &amp; DMCA</a></div>
+                <div class="copyright">&copy; <span id="year">2026</span> AnimeLuther &middot; تم الإنشاء بواسطة <strong>AnimeLuther</strong> <span class="version-badge">v1.1.2</span></div>
+                <div class="disclaimer">هذا الموقع لا يخزن أي ملفات على خادمه. جميع المحتويات مقدمة من أطراف ثالثة غير مرتبطة. <a href="/pages/dmca" rel="nofollow">حقوق الطبع والنشر DMCA</a></div>
             </div>
         </div>
     </div>
 </footer>
 
 <script>
-// ============ PROXY CONFIG ============
 const PROXY_BASE = '/proxy?url=';
 const VIDEO_PROXY_BASE = '/proxy-video?url=';
 
-function getProxyUrl(url) {
-    return PROXY_BASE + encodeURIComponent(url);
-}
-function getVideoProxyUrl(url) {
-    return VIDEO_PROXY_BASE + encodeURIComponent(url);
-}
+function getProxyUrl(url) { return PROXY_BASE + encodeURIComponent(url); }
+function getVideoProxyUrl(url) { return VIDEO_PROXY_BASE + encodeURIComponent(url); }
 
-// ============ STATE ============
 const state = {
     slug: '',
     title: '',
@@ -1318,9 +1034,9 @@ const state = {
     currentMegap: null,
     currentMegapSource: 'ani',
     aniskip: null,
-    lastSource: null,       // { type: 'megap'|'apiplayer', ... } for auto-next resume
-    _autoFallback: false,   // when true, auto-try next server on failure
-    _fallbackIndex: 0,      // current position in the fallback chain
+    lastSource: null,
+    _autoFallback: false,
+    _fallbackIndex: 0,
     airedCount: null,
     totalEpisodes: null,
     epView: localStorage.getItem('ak_epView') || 'grid',
@@ -1328,7 +1044,6 @@ const state = {
     epRange: 0,
 };
 
-// ============ SETTINGS (persisted) ============
 const settings = {
     autoPlay: localStorage.getItem('ak_autoPlay') !== '0',
     autoNext: localStorage.getItem('ak_autoNext') !== '0',
@@ -1345,11 +1060,7 @@ function pushPlayerSettings() {
     win.postMessage({ type: 'player-settings', autoSkip: settings.autoSkip, autoplay: settings.autoPlay }, '*');
 }
 
-// ============ CONTINUE WATCHING (localStorage) ============
-// Rich store (home cards): { slug: { slug, title, poster, ep, epNum, ts, anilistId, watched: [] } }
-// Legacy store (home progress %): user.playing = { slug: [ep, currentSeconds, durationSeconds] }
 const CONT_KEY = 'animekai:continue';
-
 function contSlug() {
     return state.slug || (state.anilistId ? 'anilist-' + state.anilistId : ('anon-' + (state.title || 'anime').toLowerCase().replace(/\W+/g, '-').slice(0, 40)));
 }
@@ -1427,7 +1138,6 @@ function toggleLayout() {
     try { localStorage.setItem('ak_theater', on ? '1' : '0'); } catch (e) {}
 }
 
-// ============ DOM REFS ============
 const playerFrame = document.getElementById('playerFrame');
 const playerWrapper = document.getElementById('player-wrapper');
 const loadingOverlay = document.getElementById('loadingOverlay');
@@ -1470,7 +1180,6 @@ const relatedGrid = document.getElementById('relatedGrid');
 const recPanel = document.getElementById('recPanel');
 const recGrid = document.getElementById('recGrid');
 
-// ============ EPISODE VIEW / FILTER / SPOILER ============
 const EP_VIEW_ORDER = ['grid', 'list', 'image'];
 const EP_VIEW_ICONS = { grid: 'fa-th-large', list: 'fa-list-ul', image: 'fa-images' };
 function syncEpLayoutBtn() {
@@ -1513,13 +1222,11 @@ if (epFilterInput) {
 }
 if (epRangeSelect) epRangeSelect.addEventListener('change', () => setEpRange(parseInt(epRangeSelect.value, 10)));
 
-// ============ INIT ============
 const params = new URLSearchParams(window.location.search);
 state.slug = params.get('slug') || '';
 const anilistIdParam = params.get('anilistId');
 applyTheaterFromStore();
 
-// Bind setting toggles
 const autoPlayChk = document.getElementById('autoPlayChk');
 const autoNextChk = document.getElementById('autoNextChk');
 const autoSkipChk = document.getElementById('autoSkipChk');
@@ -1533,17 +1240,15 @@ autoSkipChk.addEventListener('change', () => { settings.autoSkip = autoSkipChk.c
 if (anilistIdParam) {
     state.anilistId = anilistIdParam;
     state.slug = '';
-    pageTitle.textContent = 'Loading anime...';
+    pageTitle.textContent = 'جاري التحميل...';
     (async () => {
-        // Fetch info and episodes in parallel — they're independent, so loading
-        // them concurrently cuts the perceived wait time roughly in half.
         const infoP = fetch(`/api/anilist/info?anilistId=${encodeURIComponent(anilistIdParam)}`)
             .then(r => r.json())
             .then(data => {
                 if (data.resolved) {
                     applyInfo(data.resolved);
                     if (data.resolved.title) {
-                        document.title = data.resolved.title + ' - AnimeVerse';
+                        document.title = data.resolved.title + ' - AnimeLuther';
                         pageTitle.textContent = data.resolved.title;
                     }
                 }
@@ -1552,26 +1257,19 @@ if (anilistIdParam) {
         await Promise.all([infoP, loadEpisodes()]);
     })();
 } else if (!state.slug) {
-    pageTitle.textContent = 'No anime specified';
-    episodeGrid.innerHTML = '<div class="error-msg" style="grid-column:1/-1"><i class="fas fa-exclamation-triangle"></i><p>No anime slug provided. Use <code>?slug=anime-slug-here</code> or <code>?anilistId=12345</code></p></div>';
+    pageTitle.textContent = 'لم يتم تحديد أنمي';
+    episodeGrid.innerHTML = '<div class="error-msg" style="grid-column:1/-1"><i class="fas fa-exclamation-triangle"></i><p>لم يتم تحديد اسم الأنمي.</p></div>';
 } else {
-    pageTitle.textContent = 'Loading: ' + state.slug;
-    slugInfo.textContent = 'Slug: ' + state.slug;
+    pageTitle.textContent = 'جاري التحميل: ' + state.slug;
+    slugInfo.textContent = 'الرمز: ' + state.slug;
     loadEpisodes();
 }
 
-// ============ LOAD EPISODES ============
-// anikaitv is retired — episodes come straight from miruro (via AniList),
-// falling back to a plain AniList episode-count list so MEGA PLAY and the
-// other independent sources still work even if the miruro pipe is down.
 async function loadEpisodes() {
-    episodeGrid.innerHTML = '<div class="loading-text" style="grid-column:1/-1;text-align:center;padding:20px;"><i class="fas fa-spinner fa-spin"></i> Loading episodes...</div>';
-
+    episodeGrid.innerHTML = '<div class="loading-text" style="grid-column:1/-1;text-align:center;padding:20px;"><i class="fas fa-spinner fa-spin"></i> جاري تحميل الحلقات...</div>';
     try {
         await resolveAnilist();
         if (!state.anilistId) throw new Error('Could not resolve AniList id');
-        // Don't let a dead miruro pipe stall the page — fall back to AniList
-        // episodes after a short timeout so MEGA PLAY still renders.
         const ctrl = new AbortController();
         const timer = setTimeout(() => ctrl.abort(), 15000);
         let epResp;
@@ -1598,12 +1296,6 @@ async function loadEpisodes() {
         selectEpisode(target.num);
     } catch (e) {
         console.error('Miruro episodes failed:', e);
-        // Final fallback: miruro is down, but AniList is resolved. Build a
-        // numeric episode list so MEGA PLAY (independent of miruro) works.
-        // AniList leaves `episodes` null for ongoing shows, so fall back to
-        // the next airing episode number (aired count = next - 1).
-        // If state.info is missing (e.g. /api/anilist/info also failed on
-        // Render), fetch it directly from the server before building the list.
         if (!state.info && state.anilistId) {
             try {
                 const infoResp = await fetch(`/api/anilist/info?anilistId=${state.anilistId}`);
@@ -1613,20 +1305,16 @@ async function loadEpisodes() {
                     state.tmdbId = infoData.resolved.tmdbId || state.tmdbId;
                     applyInfo(infoData.resolved);
                 }
-            } catch (_) { /* non-fatal */ }
+            } catch (_) {}
         }
         const info = state.info || {};
         const nextEp = (info.nextAiringEpisode && info.nextAiringEpisode.episode) || 0;
-        // For airing shows AniList's `episodes` field is the *planned total*,
-        // not the aired count — using it would flood the list with unreleased
-        // episodes. Only trust it for finished shows; otherwise use the next
-        // airing episode minus one (aired count).
         let total = (String(info.status || '').toUpperCase() === 'FINISHED' && info.episodes)
             ? info.episodes
             : (nextEp ? nextEp - 1 : 0);
         if (total < 1) total = nextEp;
         if (state.anilistId && total) {
-            const list = Array.from({ length: total }, (_, i) => ({ num: String(i + 1), title: 'Episode ' + (i + 1), miruro: true }));
+            const list = Array.from({ length: total }, (_, i) => ({ num: String(i + 1), title: 'الحلقة ' + (i + 1), miruro: true }));
             state.episodes = list;
             state.epSource = 'miruro';
             state.airedCount = total;
@@ -1641,15 +1329,13 @@ async function loadEpisodes() {
         episodeGrid.innerHTML = `
             <div class="error-msg" style="grid-column:1/-1">
                 <i class="fas fa-exclamation-triangle"></i>
-                <p>Unable to load episodes for this anime.</p>
-                <p style="font-size:0.8rem;color:#4a5270;">${e.message.substring(0, 100)}</p>
-                <button class="retry-btn" onclick="loadEpisodes()"><i class="fas fa-redo"></i> Retry</button>
+                <p>تعذر تحميل الحلقات لهذا الأنمي.</p>
+                <button class="retry-btn" onclick="loadEpisodes()"><i class="fas fa-redo"></i> إحياء المحاولة</button>
             </div>
         `;
     }
 }
 
-// ============ ANILIST RESOLVE + INFO ============
 async function resolveAnilist() {
     if (state.anilistId) return true;
     const baseSlug = (state.slug || '').replace(/\/ep-?\d*$/, '');
@@ -1665,12 +1351,10 @@ function applyInfo(resolved) {
     if (!resolved) return;
     if (resolved.title && !state.title) {
         state.title = resolved.title;
-        document.title = resolved.title + ' - AnimeVerse';
+        document.title = resolved.title + ' - AnimeLuther';
         pageTitle.textContent = resolved.title;
     }
     const info = resolved.info;
-    // TMDB id (for the apiplayer source) — prefer the resolver's value, else
-    // dig it out of AniList externalLinks.
     state.tmdbId = resolved.tmdbId || null;
     if (!state.tmdbId && info && Array.isArray(info.externalLinks)) {
         for (const link of info.externalLinks) {
@@ -1695,14 +1379,13 @@ function applyInfo(resolved) {
     if (info.averageScore) infoScore.textContent = '★ ' + info.averageScore;
     const parts = [];
     if (info.format) parts.push(info.format);
-    if (info.episodes) parts.push(info.episodes + ' EPS');
-    if (info.duration) parts.push(info.duration + ' MIN');
+    if (info.episodes) parts.push(info.episodes + ' حلقة');
+    if (info.duration) parts.push(info.duration + ' دقيقة');
     if (info.seasonYear) parts.push(info.seasonYear);
     if (info.status) parts.push(info.status);
     infoMeta.innerHTML = parts.map(p => `<span class="badge">${p}</span>`).join('');
     infoGenres.innerHTML = (info.genres || []).slice(0, 5).map(g => `<span class="genre">${g}</span>`).join('');
 
-    // AnimeX-style header title + external links
     if (whTitle) whTitle.textContent = info.title?.english || info.title?.romaji || resolved.title || state.title || '';
     if (anilistLink && state.anilistId) anilistLink.href = 'https://anilist.co/anime/' + state.anilistId;
     if (malLink && info.idMal) malLink.href = 'https://myanimelist.net/anime/' + info.idMal;
@@ -1711,15 +1394,15 @@ function applyInfo(resolved) {
     const next = info.nextAiringEpisode;
     if (next && next.episode && next.airingAt) {
         const when = new Date(next.airingAt * 1000);
-        const dateStr = when.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
-        const airMsg = `Next episode EP ${next.episode} · ${dateStr}`;
+        const dateStr = when.toLocaleDateString('ar-EG', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+        const airMsg = `الحلقة القادمة EP ${next.episode} · ${dateStr}`;
         if (infoAiring) {
             infoAiring.style.display = 'flex';
             infoAiring.innerHTML = `<i class="fas fa-broadcast-tower"></i>${airMsg}`;
         }
         if (nextEpBanner) {
             nextEpBanner.style.display = 'flex';
-            nextEpBannerText.textContent = `Episode ${next.episode} of ${info.title?.english || info.title?.romaji || 'this anime'} releases`;
+            nextEpBannerText.textContent = `موعد صدور الحلقة ${next.episode} من ${info.title?.english || info.title?.romaji || 'هذا الأنمي'}`;
             const at = document.createElement('span');
             at.className = 'air-at';
             at.textContent = dateStr;
@@ -1735,14 +1418,13 @@ function applyInfo(resolved) {
         .replace(/<[^>]+>/g, '')
         .replace(/\s+/g, ' ')
         .trim();
-    infoSynopsis.textContent = desc || 'No synopsis available.';
+    infoSynopsis.textContent = desc || 'لا توجد نبذة متوفرة.';
     if (state.currentEp) saveContinue();
     renderMyList();
 }
 
-// ============ MY LIST (miruro-style watchlist) ============
 const MYLIST_KEY = 'animekai:list';
-const LIST_STATUS_LABELS = { watching: 'Watching', planning: 'Planning', completed: 'Completed', on_hold: 'On Hold', dropped: 'Dropped' };
+const LIST_STATUS_LABELS = { watching: 'أتابعها', planning: 'أخطط لمشاهدتها', completed: 'مكتمل', on_hold: 'متوقف مؤقتاً', dropped: 'تم إفلاته' };
 
 function loadMyList() {
     try { return JSON.parse(localStorage.getItem(MYLIST_KEY)) || {}; } catch (e) { return {}; }
@@ -1780,7 +1462,7 @@ function renderMyList() {
     listBtn.classList.toggle('in-list', !!status);
     listBtn.innerHTML = status
         ? `<i class="fas fa-check-circle"></i> <span>${LIST_STATUS_LABELS[status] || status}</span>`
-        : `<i class="fas fa-plus"></i> <span>Add to My List</span>`;
+        : `<i class="fas fa-plus"></i> <span>إضافة لقائمتي</span>`;
     listMenu.querySelectorAll('.list-menu-item').forEach(item => {
         item.classList.toggle('active', item.dataset.status === status);
     });
@@ -1789,7 +1471,6 @@ function toggleListMenu(force) {
     const open = typeof force === 'boolean' ? force : !listMenu.classList.contains('open');
     listMenu.classList.toggle('open', open);
 }
-// Bind My List control
 if (listBtn) {
     listBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleListMenu(); });
     listMenu.querySelectorAll('.list-menu-item').forEach(item => {
@@ -1810,7 +1491,6 @@ function pickAniskip(entries, type) {
         .sort((a, b) => (b.votes || 0) - (a.votes || 0))[0] || null;
 }
 
-// ============ RENDER EPISODES ============
 const EP_RANGE_SIZE = 100;
 function computeRanges(episodes) {
     state.epRanges = [];
@@ -1847,19 +1527,19 @@ function renderEpisodes(episodes) {
     if (epCountEl) {
         const ac = state.airedCount, tc = state.totalEpisodes;
         epCountEl.textContent = (ac && tc && ac < tc)
-            ? `${ac} / ${tc} eps`
-            : episodes.length + ' eps';
+            ? `${ac} / ${tc} حلقة`
+            : episodes.length + ' حلقة';
     }
     if (epListFooter) {
-        epFooterNow.textContent = 'E' + (state.currentEp || '—');
+        epFooterNow.textContent = 'الحلقة ' + (state.currentEp || '—');
         const ac = state.airedCount, tc = state.totalEpisodes;
         epFooterTotal.textContent = (ac && tc && ac < tc)
-            ? `${ac} / ${tc} episodes`
-            : `${episodes.length} episodes`;
+            ? `${ac} / ${tc} حلقة`
+            : `${episodes.length} حلقة`;
         epListFooter.style.display = 'flex';
     }
     if (episodes.length === 0) {
-        episodeGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;color:#5a6280;">No episodes found</div>';
+        episodeGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;color:#5a6280;">لا توجد حلقات</div>';
         if (epRangeSelect) { epRangeSelect.innerHTML = ''; epRangeSelect.style.display = 'none'; }
         return;
     }
@@ -1883,7 +1563,7 @@ function renderEpisodes(episodes) {
             <div class="ep-grid-item list-row ${state.currentEp === ep.num ? 'active' : ''}${watched.indexOf(String(ep.num)) >= 0 ? ' watched' : ''}"
                  data-num="${ep.num}" onclick="selectEpisode('${ep.num}')">
                 <span class="ep-num">EP ${ep.num}</span>
-                <span class="ep-row-title">${escStr(ep.title || ('Episode ' + ep.num))}</span>
+                <span class="ep-row-title">${escStr(ep.title || ('الحلقة ' + ep.num))}</span>
             </div>
         `).join('');
     } else if (view === 'image') {
@@ -1893,7 +1573,7 @@ function renderEpisodes(episodes) {
                  data-num="${ep.num}"${thumb ? ` style="background-image:url('${escStr(thumb)}')"` : ''}
                  onclick="selectEpisode('${ep.num}')">
                 <span class="ep-num">${ep.num}</span>
-                <span class="ep-title">${escStr(ep.title || ('Episode ' + ep.num))}</span>
+                <span class="ep-title">${escStr(ep.title || ('الحلقة ' + ep.num))}</span>
             </div>
         `).join('');
     } else {
@@ -1908,17 +1588,16 @@ function renderEpisodes(episodes) {
 
 function updateEpNav() {
     const idx = state.episodes.findIndex(e => e.num === state.currentEp);
-    prevEpBtn.disabled = idx <= 0;
-    nextEpBtn.disabled = idx < 0 || idx >= state.episodes.length - 1;
+    prevEpBtn.disabled = idx >= state.episodes.length - 1;
+    nextEpBtn.disabled = idx <= 0;
 }
 
 function changeEpisode(dir) {
     const idx = state.episodes.findIndex(e => e.num === state.currentEp);
-    const target = state.episodes[idx + dir];
+    const target = state.episodes[idx - dir];
     if (target) selectEpisode(target.num, { resume: true });
 }
 
-// ============ SELECT EPISODE ============
 async function selectEpisode(numStr, opts = {}) {
     const ep = state.episodes.find(e => e.num === numStr);
     if (!ep) return;
@@ -1930,8 +1609,8 @@ async function selectEpisode(numStr, opts = {}) {
 
     document.querySelectorAll('.ep-btn, .ep-grid-item').forEach(btn => btn.classList.toggle('active', btn.dataset.num === numStr));
 
-    epMeta.innerHTML = `<span><i class="fas fa-film"></i> Episode ${ep.num}</span>`;
-    currentEpName.textContent = `Episode ${ep.num}`;
+    epMeta.innerHTML = `<span><i class="fas fa-film"></i> الحلقة ${ep.num}</span>`;
+    currentEpName.textContent = `الحلقة ${ep.num}`;
     currentEpType.textContent = '';
     if (whEpNum) whEpNum.textContent = `EP ${ep.num}`;
     updateEpNav();
@@ -1943,12 +1622,8 @@ async function selectEpisode(numStr, opts = {}) {
         if (el) el.innerHTML = '';
     });
 
-    // Load aniskip data for this episode (miruro mappings) — used by skip buttons
     loadAniskip(ep.num).catch(() => {});
 
-    // Render every working source list first, then start the best default.
-    // MEGA PLAY (sub, AniList mapping) is the default; MEGA CLUB (MAL mapping)
-    // is the manual second megaplay-family option. APIPLAYER (TMDB) is last.
     renderMegapOptions();
     renderApiplayerOptions();
     renderAnimexOptions();
@@ -1968,8 +1643,6 @@ async function loadAniskip(epNum) {
     }
     const resp = await fetch(`/api/miruro/servers?anilistId=${state.anilistId}&episode=${encodeURIComponent(epNum)}`);
     const data = await resp.json();
-    // The miruro mappings are the most reliable source for a TMDB id (used by
-    // the apiplayer source); AniList externalLinks rarely include it.
     if (data.mappings && data.mappings.themoviedbId) {
         state.tmdbId = data.mappings.themoviedbId;
         if (document.getElementById('apipList').children.length === 0) renderApiplayerOptions();
@@ -1986,12 +1659,10 @@ async function loadAniskip(epNum) {
 function updateSvCount() {
     if (svCountEl) {
         const n = document.querySelectorAll('#serverPanel .sv-btn').length;
-        svCountEl.textContent = n ? n + (n === 1 ? ' server' : ' servers') : '—';
+        svCountEl.textContent = n ? n + ' سيرفر' : '—';
     }
 }
 
-// ============ AUTO-SERVER FALLBACK ============
-// When a server fails, automatically try the next one in the chain.
 const FALLBACK_CHAIN = [
     () => selectMegapServer('sub', 'ani'),
     () => selectMegapServer('dub', 'ani'),
@@ -2002,7 +1673,6 @@ const FALLBACK_CHAIN = [
 ];
 
 async function tryAnimexFallback() {
-    // Try the first available AnimeX provider for the current episode.
     try {
         await resolveAnilist();
         if (!state.anilistId) throw new Error('No AniList id');
@@ -2024,10 +1694,9 @@ function advanceFallback() {
     if (state._fallbackIndex >= FALLBACK_CHAIN.length) {
         state._autoFallback = false;
         state._fallbackIndex = 0;
-        showError('All servers failed for this episode.');
+        showError('فشلت جميع السيرفرات لهذه الحلقة.');
         return false;
     }
-    // Brief delay so the UI doesn't flash too fast between servers
     setTimeout(() => {
         if (state._autoFallback) {
             FALLBACK_CHAIN[state._fallbackIndex]();
@@ -2042,7 +1711,6 @@ function startFallback() {
     FALLBACK_CHAIN[0]();
 }
 
-// ============ PLAYER URL BUILDER ============
 function buildPlayerUrl(mediaUrl, opts = {}) {
     const q = new URLSearchParams();
     q.set('url', mediaUrl);
@@ -2051,8 +1719,8 @@ function buildPlayerUrl(mediaUrl, opts = {}) {
     q.set('autoplay', settings.autoPlay ? '1' : '0');
     q.set('autoSkip', settings.autoSkip ? '1' : '0');
     const epIdx = state.episodes.findIndex(ep => ep.num === state.currentEp);
-    q.set('hasPrev', epIdx > 0 ? '1' : '0');
-    q.set('hasNext', (epIdx >= 0 && epIdx < state.episodes.length - 1) ? '1' : '0');
+    q.set('hasPrev', epIdx < state.episodes.length - 1 ? '1' : '0');
+    q.set('hasNext', epIdx > 0 ? '1' : '0');
     if (opts.skipIntro) q.set('skipIntro', `${opts.skipIntro.start}-${opts.skipIntro.end}`);
     if (opts.skipOutro) q.set('skipOutro', `${opts.skipOutro.start}-${opts.skipOutro.end}`);
     if (opts.subs) q.set('subs', JSON.stringify(opts.subs));
@@ -2061,46 +1729,26 @@ function buildPlayerUrl(mediaUrl, opts = {}) {
     return 'player.html?' + q.toString();
 }
 
-function skipParams() {
-    const s = state.aniskip || {};
-    return {
-        skipIntro: s.op ? { start: s.op.start, end: s.op.end } : null,
-        skipOutro: s.ed ? { start: s.ed.start, end: s.ed.end } : null,
-    };
-}
-
-// ============ MEGA PLAY / MEGA CLUB (megaplay.buzz KotoCDN) SERVERS ============
-// MEGA PLAY resolves the KotoCDN AniList mapping (/stream/ani/...) and
-// auto-falls back to the MAL mapping (/stream/mal/...) server-side. MEGA CLUB
-// is the same megaplay API keyed straight off the MAL mapping. Both return a
-// real HLS stream that plays through player.html.
 async function renderMegapOptions() {
     const megapList = document.getElementById('megapList');
     if (!megapList) return;
-
-    try {
-        await resolveAnilist();
-    } catch (e) { /* anilistId stays null */ }
-
-    if (!state.anilistId) {
-        megapList.innerHTML = '';
-        return;
-    }
+    try { await resolveAnilist(); } catch (e) {}
+    if (!state.anilistId) { megapList.innerHTML = ''; return; }
 
     const activeSrc = (s, l) => (state.currentMegapSource === s && state.currentMegap === l) ? 'active' : '';
     megapList.innerHTML = `
         <div class="server-section">
             <div class="server-type-label">MEGA PLAY · ANILIST</div>
             <div class="server-list">
-                <div class="sv-btn sub ${activeSrc('ani', 'sub')}" data-megap="ani:sub" onclick="selectMegapServer('sub', 'ani')">Sub</div>
-                <div class="sv-btn dub ${activeSrc('ani', 'dub')}" data-megap="ani:dub" onclick="selectMegapServer('dub', 'ani')">Dub</div>
+                <div class="sv-btn sub ${activeSrc('ani', 'sub')}" data-megap="ani:sub" onclick="selectMegapServer('sub', 'ani')">مترجم</div>
+                <div class="sv-btn dub ${activeSrc('ani', 'dub')}" data-megap="ani:dub" onclick="selectMegapServer('dub', 'ani')">مدبلج</div>
             </div>
         </div>
         <div class="server-section">
             <div class="server-type-label">MEGA CLUB · MAL</div>
             <div class="server-list">
-                <div class="sv-btn sub ${activeSrc('mal', 'sub')}" data-megap="mal:sub" onclick="selectMegapServer('sub', 'mal')">Sub</div>
-                <div class="sv-btn dub ${activeSrc('mal', 'dub')}" data-megap="mal:dub" onclick="selectMegapServer('dub', 'mal')">Dub</div>
+                <div class="sv-btn sub ${activeSrc('mal', 'sub')}" data-megap="mal:sub" onclick="selectMegapServer('sub', 'mal')">مترجم</div>
+                <div class="sv-btn dub ${activeSrc('mal', 'dub')}" data-megap="mal:dub" onclick="selectMegapServer('dub', 'mal')">مدبلج</div>
             </div>
         </div>`;
     updateSvCount();
@@ -2116,13 +1764,13 @@ async function selectMegapServer(lang, source = 'ani') {
     currentEpType.textContent = (source === 'mal' ? 'MEGA CLUB' : 'MEGA PLAY') + ' · ' + lang.toUpperCase();
 
     loadingOverlay.style.display = 'flex';
-    loadingOverlay.querySelector('span').textContent = source === 'mal' ? 'Loading Mega Club stream...' : 'Loading MegaPlay stream...';
+    loadingOverlay.querySelector('span').textContent = 'جاري الاتصال بالسيرفر...';
 
     try {
         await resolveAnilist();
         const resp = await fetch(`/api/megap/stream?anilistId=${state.anilistId}&episode=${encodeURIComponent(state.currentEp)}&lang=${lang}&source=${source}`);
         const data = await resp.json();
-        if (!data.m3u8Url) throw new Error(data.error || 'MegaPlay returned no stream');
+        if (!data.m3u8Url) throw new Error(data.error || 'تعذر جلب البث');
 
         const playableUrl = getVideoProxyUrl(data.m3u8Url) + '&referer=' + encodeURIComponent(data.referer);
         playerFrame.src = buildPlayerUrl(playableUrl, {
@@ -2130,18 +1778,16 @@ async function selectMegapServer(lang, source = 'ani') {
             skipIntro: data.intro && data.intro.end > data.intro.start ? { start: data.intro.start, end: data.intro.end } : null,
             skipOutro: data.outro && data.outro.end > data.outro.start ? { start: data.outro.start, end: data.outro.end } : null,
             subs: (data.tracks || []).filter(t => t.file).map(t => ({
-                label: t.label || t.lang || 'Subtitles',
-                lang: t.lang || 'en',
+                label: t.label || t.lang || 'الترجمة',
+                lang: t.lang || 'ar',
                 file: getVideoProxyUrl(t.file) + '&referer=' + encodeURIComponent(data.referer),
                 default: !!t.default,
             })),
         });
         loadingOverlay.style.display = 'none';
     } catch (e) {
-        console.error('MegaPlay stream failed:', e);
+        console.error('MegaPlay failed:', e);
         if (state._autoFallback) {
-            const label = (source === 'mal' ? 'MEGA CLUB' : 'MEGA PLAY') + ' ' + lang.toUpperCase();
-            console.warn(label + ' failed, trying next server...');
             advanceFallback();
             return;
         }
@@ -2149,10 +1795,6 @@ async function selectMegapServer(lang, source = 'ani') {
     }
 }
 
-// ============ APIPLAYER (apiplayer.ru) ============
-// TMDB-based streaming API. We always have a usable embed URL (the site
-// allows framing), and optionally a resolved HLS master. We prefer HLS when
-// available so the custom player/skip buttons still work.
 async function renderApiplayerOptions() {
     const list = document.getElementById('apipList');
     list.innerHTML = '';
@@ -2160,20 +1802,15 @@ async function renderApiplayerOptions() {
         if (!state.tmdbId) return;
         const epNum = state.currentEp;
         if (!epNum) return;
-        const season = (state.info && state.info.season) || 1;
         list.innerHTML = `
             <div class="server-section">
-                <div class="server-type-label">APIPLAYER · TMDB ${state.tmdbId}</div>
+                <div class="server-type-label">APIPLAYER · TMDB</div>
                 <div class="server-list">
-                    <div class="sv-btn embed"
-                         onclick="selectApiplayerServer()">
-                        Episode ${epNum}
-                    </div>
+                    <div class="sv-btn embed" onclick="selectApiplayerServer()">الحلقة ${epNum}</div>
                 </div>
             </div>`;
         updateSvCount();
     } catch (e) {
-        console.warn('Apiplayer options unavailable:', e.message);
         list.innerHTML = '';
     }
 }
@@ -2186,7 +1823,7 @@ async function selectApiplayerServer() {
     if (btn) btn.classList.add('active');
     currentEpType.textContent = 'APIPLAYER';
     loadingOverlay.style.display = 'flex';
-    loadingOverlay.querySelector('span').textContent = 'Resolving apiplayer stream...';
+    loadingOverlay.querySelector('span').textContent = 'جاري جلب البث الاحتياطي...';
 
     const season = (state.info && state.info.season) || 1;
     try {
@@ -2199,44 +1836,31 @@ async function selectApiplayerServer() {
             loadingOverlay.style.display = 'none';
             return;
         }
-        // HLS not harvested yet — the embed page harvests client-side and
-        // keeps polling, so just load it directly (apiplayer allows framing).
-        loadingOverlay.querySelector('span').textContent = 'Loading apiplayer player...';
         playerFrame.src = data.embedUrl || '';
         loadingOverlay.style.display = 'none';
     } catch (e) {
-        console.error('Apiplayer stream failed:', e);
         if (state._autoFallback) {
-            console.warn('APIPLAYER failed, trying next server...');
             advanceFallback();
             return;
         }
         loadingOverlay.style.display = 'none';
-        showError('Apiplayer stream failed: ' + e.message);
+        showError('فشل السيرفر الاحتياطي: ' + e.message);
     }
 }
 
-// ============ AUTO-NEXT ============
 function resumeSource() {
     const ls = state.lastSource;
     if (!ls) return;
-    if (ls.type === 'megap') {
-        selectMegapServer(ls.lang || 'sub', ls.source || 'ani');
-    } else if (ls.type === 'apiplayer') {
-        selectApiplayerServer();
-    } else if (ls.type === 'animex') {
-        selectAnimexServer(ls.lang || 'sub', ls.providerId);
-    } else if (ls.type === 'custom' && ls.url) {
+    if (ls.type === 'megap') selectMegapServer(ls.lang || 'sub', ls.source || 'ani');
+    else if (ls.type === 'apiplayer') selectApiplayerServer();
+    else if (ls.type === 'animex') selectAnimexServer(ls.lang || 'sub', ls.providerId);
+    else if (ls.type === 'custom' && ls.url) {
         state.lastSource = ls;
-        currentEpType.textContent = 'CUSTOM EMBED';
+        currentEpType.textContent = 'رابط مخصص';
         playerFrame.src = buildPlayerUrl(ls.url);
     }
 }
 
-// ============ ANIMEX SERVERS (animex.one provider) ============
-// AnimeX exposes unauthenticated sub/dub providers per episode that return
-// ready-to-play HLS. Rendered as a third server family alongside MegaPlay and
-// apiplayer.
 async function renderAnimexOptions() {
     const list = document.getElementById('animexList');
     if (!list) return;
@@ -2249,14 +1873,14 @@ async function renderAnimexOptions() {
         if (data.slug) state.animexSlug = data.slug;
         const mk = (arr, lang) => (arr && arr.length) ? `
             <div class="server-section">
-                <div class="server-type-label">${lang.toUpperCase()}</div>
+                <div class="server-type-label">${lang === 'sub' ? 'مترجم' : 'مدبلج'}</div>
                 <div class="server-list">
-                    ${arr.map(p => `<div class="sv-btn sub ${state.currentAnimex && state.currentAnimex.lang === lang && state.currentAnimex.providerId === p.id ? 'active' : ''}" data-animex="${lang}:${p.id}" title="${escapeHtml(p.tip || '')}" onclick="selectAnimexServer('${lang}','${p.id}')">${p.id}</div>`).join('')}
+                    ${arr.map(p => `<div class="sv-btn sub ${state.currentAnimex && state.currentAnimex.lang === lang && state.currentAnimex.providerId === p.id ? 'active' : ''}" data-animex="${lang}:${p.id}" onclick="selectAnimexServer('${lang}','${p.id}')">${p.id}</div>`).join('')}
                 </div>
             </div>` : '';
         list.innerHTML = `
             <div class="server-section" style="margin-top:6px">
-                <div class="server-type-label">ANIMEX PROVIDERS</div>
+                <div class="server-type-label">سيرفرات ANIMEX</div>
                 ${mk(data.sub, 'sub')}${mk(data.dub, 'dub')}
             </div>`;
         updateSvCount();
@@ -2271,28 +1895,25 @@ async function selectAnimexServer(lang, providerId) {
     state.lastSource = { type: 'animex', lang, providerId };
     document.querySelectorAll('[data-animex]').forEach(btn => btn.classList.toggle('active', btn.dataset.animex === lang + ':' + providerId));
     document.querySelectorAll('#megapList .sv-btn, #apipList .sv-btn').forEach(btn => btn.classList.remove('active'));
-    currentEpType.textContent = 'ANIMEX · ' + lang.toUpperCase() + ' · ' + providerId;
+    currentEpType.textContent = 'ANIMEX · ' + (lang === 'sub' ? 'مترجم' : 'مدبلج');
     loadingOverlay.style.display = 'flex';
-    loadingOverlay.querySelector('span').textContent = 'Loading AnimeX stream...';
+    loadingOverlay.querySelector('span').textContent = 'جاري التحميل...';
     try {
         const resp = await fetch(`/api/animex/stream?anilistId=${state.anilistId}&episode=${encodeURIComponent(state.currentEp)}&type=${lang}&providerId=${providerId}`);
         const data = await resp.json();
-        if (!data.m3u8Url) throw new Error(data.error || 'AnimeX returned no stream');
-        playerFrame.src = data.m3u8Url; // already server-relayed via /proxy-video
+        if (!data.m3u8Url) throw new Error(data.error || 'تعذر البث');
+        playerFrame.src = data.m3u8Url;
         loadingOverlay.style.display = 'none';
     } catch (e) {
-        console.error('AnimeX stream failed:', e);
         if (state._autoFallback) {
-            console.warn('ANIMEX ' + lang.toUpperCase() + ' ' + providerId + ' failed, trying next server...');
             advanceFallback();
             return;
         }
         loadingOverlay.style.display = 'none';
-        showError('AnimeX stream failed: ' + e.message);
+        showError('خطأ في السيرفر: ' + e.message);
     }
 }
 
-// ============ CUSTOM EMBED (load any external player URL) ============
 function showCustomEmbedInput() {
     const existing = document.getElementById('customEmbedModal');
     if (existing) existing.remove();
@@ -2300,13 +1921,13 @@ function showCustomEmbedInput() {
     modal.id = 'customEmbedModal';
     modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:flex;align-items:center;justify-content:center;';
     modal.innerHTML = `
-        <div style="background:#151f2e;border:1px solid rgba(159,173,189,.2);border-radius:12px;padding:20px;width:min(420px,90vw);box-shadow:0 16px 40px rgba(0,0,0,.6);">
-            <h3 style="color:#e8ecf4;font-size:15px;font-weight:700;margin-bottom:12px;">Load Custom Embed</h3>
-            <p style="color:#8b93b5;font-size:12px;margin-bottom:10px;">Paste any embed or video URL (mp4, m3u8, embed page, etc.)</p>
-            <input id="customEmbedUrl" type="text" placeholder="https://..." style="width:100%;padding:10px 12px;background:#0f1620;border:1px solid rgba(159,173,189,.2);border-radius:8px;color:#e8ecf4;font-size:13px;box-sizing:border-box;outline:none;" autofocus />
-            <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end;">
-                <button onclick="this.closest('#customEmbedModal').remove()" style="padding:8px 16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:#aaa;font-size:13px;cursor:pointer;">Cancel</button>
-                <button onclick="loadCustomEmbed()" style="padding:8px 16px;background:#e45f3a;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;">Load</button>
+        <div style="background:#151f2e;border:1px solid rgba(159,173,189,.2);border-radius:12px;padding:20px;width:min(420px,90vw);box-shadow:0 16px 40px rgba(0,0,0,.6);text-align:right;">
+            <h3 style="color:#e8ecf4;font-size:15px;font-weight:700;margin-bottom:12px;">تحميل رابط مخصص</h3>
+            <p style="color:#8b93b5;font-size:12px;margin-bottom:10px;">الصق رابط الفيديو أو الحزمة هنا</p>
+            <input id="customEmbedUrl" type="text" placeholder="https://..." style="width:100%;padding:10px 12px;background:#0f1620;border:1px solid rgba(159,173,189,.2);border-radius:8px;color:#e8ecf4;font-size:13px;box-sizing:border-box;outline:none;text-align:left;" autofocus />
+            <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-start;">
+                <button onclick="loadCustomEmbed()" style="padding:8px 16px;background:#e45f3a;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;">تحميل</button>
+                <button onclick="this.closest('#customEmbedModal').remove()" style="padding:8px 16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:#aaa;font-size:13px;cursor:pointer;">إلغاء</button>
             </div>
         </div>`;
     document.body.appendChild(modal);
@@ -2324,25 +1945,22 @@ function loadCustomEmbed() {
     if (!url) return;
     state.lastSource = { type: 'custom', url };
     document.querySelectorAll('.sv-btn').forEach(btn => btn.classList.remove('active'));
-    currentEpType.textContent = 'CUSTOM EMBED';
+    currentEpType.textContent = 'رابط مخصص';
     loadingOverlay.style.display = 'flex';
-    loadingOverlay.querySelector('span').textContent = 'Loading embed...';
+    loadingOverlay.querySelector('span').textContent = 'جاري التحميل...';
     try {
-        // If it's a direct video/hls URL, load it directly
         if (/\.m3u8($|\?)/i.test(url) || /\.mp4($|\?)/i.test(url) || /\.webm($|\?)/i.test(url)) {
             playerFrame.src = buildPlayerUrl(getVideoProxyUrl(url) + '&referer=' + encodeURIComponent(new URL(url).origin + '/'));
         } else {
-            // It's an embed page — load it as an iframe src
             playerFrame.src = buildPlayerUrl(getVideoProxyUrl(url));
         }
         loadingOverlay.style.display = 'none';
     } catch (e) {
         loadingOverlay.style.display = 'none';
-        showError('Custom embed failed: ' + e.message);
+        showError('فشل تحميل الرابط: ' + e.message);
     }
 }
 
-// ============ TRAILER ============
 let trailerUrl = '';
 async function loadTrailer() {
     try {
@@ -2358,18 +1976,17 @@ async function loadTrailer() {
     } catch (e) {}
 }
 function openTrailer() {
-    if (!trailerUrl) { showError('Trailer unavailable.'); return; }
+    if (!trailerUrl) { showError('الإعلان غير متوفر.'); return; }
     const dim = document.createElement('div');
     dim.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;display:flex;align-items:center;justify-content:center;';
     dim.innerHTML = `<div style="position:relative;width:min(900px,92vw);aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden">
-        <button style="position:absolute;top:-38px;right:0;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer" onclick="this.closest('div').remove();document.body.removeChild(${(dim)?'dimEl':'null'})">&times;</button>
+        <button style="position:absolute;top:-38px;left:0;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer" onclick="this.closest('div').remove();document.body.removeChild(${(dim)?'dimEl':'null'})">&times;</button>
         <iframe src="${trailerUrl}" style="width:100%;height:100%;border:0" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
     </div>`;
     document.body.appendChild(dim);
     dim.querySelector('button').onclick = () => document.body.removeChild(dim);
 }
 
-// ============ RELATED + RECOMMENDATIONS (animex-style extras) ============
 let extrasLoaded = false;
 async function loadExtras() {
     if (extrasLoaded || !state.anilistId) return;
@@ -2378,16 +1995,14 @@ async function loadExtras() {
         const resp = await fetch(`/api/anime/extras?anilistId=${state.anilistId}`);
         const data = await resp.json();
         if (data.relations && data.relations.length) {
-            renderExtrasGrid(relatedGrid, data.relations, (it) => it.relationType || 'Related');
+            renderExtrasGrid(relatedGrid, data.relations, (it) => it.relationType || 'مرتبط');
             if (relatedPanel) relatedPanel.style.display = '';
         }
         if (data.recommendations && data.recommendations.length) {
             renderExtrasGrid(recGrid, data.recommendations, null);
             if (recPanel) recPanel.style.display = '';
         }
-    } catch (e) {
-        // non-fatal
-    }
+    } catch (e) {}
 }
 function renderExtrasGrid(grid, items, tagFn) {
     if (!grid) return;
@@ -2400,8 +2015,6 @@ function renderExtrasGrid(grid, items, tagFn) {
         </a>
     `).join('');
 }
-
-
 
 function escapeHtml(s) { return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
@@ -2416,7 +2029,7 @@ window.addEventListener('message', (e) => {
         return;
     }
     if (d.type === 'player-nav') {
-        changeEpisode(d.dir === 1 ? 1 : -1);
+        changeEpisode(d.dir === 1 ? -1 : 1);
         return;
     }
     if (d.type !== 'video-ended') return;
@@ -2425,11 +2038,10 @@ window.addEventListener('message', (e) => {
     savePlaying(duration, 0);
     if (!settings.autoNext) return;
     const idx = state.episodes.findIndex(ep => ep.num === state.currentEp);
-    const next = state.episodes[idx + 1];
+    const next = state.episodes[idx - 1];
     if (next) selectEpisode(next.num, { resume: true });
 });
 
-// ============ CONTROLS ============
 function toggleLight() {
     const on = playerWrapper.classList.toggle('light-on');
     document.getElementById('ctrlLight').classList.toggle('on', on);
@@ -2446,7 +2058,6 @@ function expandPlayer() {
     }
 }
 
-// ============ HELPERS ============
 function retryLastServer() {
     state._autoFallback = false;
     state._fallbackIndex = 0;
@@ -2464,7 +2075,7 @@ function showError(msg) {
     loadingOverlay.innerHTML = `
         <i class="fas fa-exclamation-circle" style="font-size:2.5rem;color:#ef4444;"></i>
         <p style="color:#7a82a0;font-size:0.9rem;">${msg.substring(0, 120)}</p>
-        <button class="retry-btn" onclick="retryLastServer()"><i class="fas fa-redo"></i> Retry</button>
+        <button class="retry-btn" onclick="retryLastServer()"><i class="fas fa-redo"></i> إعادة المحاولة</button>
     `;
     loadingOverlay.style.display = 'flex';
 }
@@ -2476,21 +2087,17 @@ function goBack() {
 const yrEl = document.getElementById('year');
 if (yrEl) yrEl.textContent = new Date().getFullYear();
 
-// ============ KEYBOARD SHORTCUTS (miruro-style) ============
-// Works only while focus is outside the player iframe (iframe keys never
-// bubble up). `[`/`]` step episodes, `l` toggles layout, `o` opens search,
-// `1`/`2`/`3` switch the episode view.
 document.addEventListener('keydown', (e) => {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT' || e.target.isContentEditable)) return;
     switch (e.key) {
         case '[':
             e.preventDefault();
-            changeEpisode(-1);
+            changeEpisode(1);
             break;
         case ']':
             e.preventDefault();
-            changeEpisode(1);
+            changeEpisode(-1);
             break;
         case 'l':
         case 'L':
@@ -2512,11 +2119,9 @@ document.addEventListener('keydown', (e) => {
             break;
     }
 });
-console.log('Watch page initialized. Slug:', state.slug);
 </script>
 
 <script>
-// ============ SITE HEADER INTERACTIONS (anikaitv-style) ============
 (function () {
     const menu = document.getElementById('menu');
     const toggler = document.getElementById('menu-toggler');
@@ -2564,8 +2169,6 @@ console.log('Watch page initialized. Slug:', state.slug);
 
     document.addEventListener('click', (e) => {
         if (menu && !menu.contains(e.target) && toggler && !toggler.contains(e.target)) closeMenu();
-        // Close the live-search popup when tapping anywhere outside the
-        // search box or its toggler (on mobile, also hide the bar).
         const inSearch = search && search.contains(e.target);
         const inToggler = searchToggler && searchToggler.contains(e.target);
         if (!inSearch && !inToggler && search && search.classList.contains('search-open')) {
@@ -2573,7 +2176,6 @@ console.log('Watch page initialized. Slug:', state.slug);
         }
     });
 
-    // ============ LIVE SEARCH (miruro-style) ============
     const form = search ? search.querySelector('form') : null;
     let searchTimer = null;
     let searchSeq = 0;
@@ -2597,7 +2199,7 @@ console.log('Watch page initialized. Slug:', state.slug);
         const items = body.querySelector('.items');
         if (!items) return;
         if (searchItems.length === 0) {
-            items.innerHTML = '<div class="no-result">No results found</div>';
+            items.innerHTML = '<div class="no-result">لا توجد نتائج</div>';
             searchIdx = -1;
             return;
         }
@@ -2615,7 +2217,7 @@ console.log('Watch page initialized. Slug:', state.slug);
             const meta = [];
             if (searchItems[i].year) meta.push(searchItems[i].year);
             if (searchItems[i].format) meta.push(searchItems[i].format);
-            meta.push(searchItems[i].subCount + ' sub' + (searchItems[i].dubCount ? ' · ' + searchItems[i].dubCount + ' dub' : ''));
+            meta.push(searchItems[i].subCount + ' مترجم' + (searchItems[i].dubCount ? ' · ' + searchItems[i].dubCount + ' مدبلج' : ''));
             el.querySelector('.meta').textContent = meta.join(' · ');
         });
         const more = popup.querySelector('.foot .more');
