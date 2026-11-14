@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Search - AnimeVerse</title>
+    <title>البحث - AnimeLuther</title>
     <link rel="shortcut icon" href="img/TITLEBAR.PNG" type="image/x-icon"/>
     <link rel="stylesheet" href="css/style.css?v=20260830">
     <link rel="stylesheet" href="css/themes.css">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Nunito', sans-serif; background: var(--c-bg, #0b0e1a); color: var(--c-text, #fff); min-height: 100vh; }
+        body { font-family: 'Nunito', sans-serif; background: var(--c-bg, #0b0e1a); color: var(--c-text, #fff); min-height: 100vh; text-align: right; }
 
         /* ============ Miruro-style header search ============ */
         header .wrapper { gap: 12px; }
@@ -23,7 +23,7 @@
             width: 100%;
             max-width: 560px;
             height: 40px;
-            padding: 0 8px 0 6px;
+            padding: 0 6px 0 8px;
             background: var(--c-surface-3);
             border: 1px solid var(--c-border);
             border-radius: 999px;
@@ -34,7 +34,7 @@
             background: var(--c-surface);
             box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-accent) 18%, transparent);
         }
-        #search form button { order: -1; font-size: 1.05rem; color: var(--c-text-3); cursor: pointer; }
+        #search form button { order: 1; font-size: 1.05rem; color: var(--c-text-3); cursor: pointer; }
         #search form button:hover { color: var(--c-text); }
         #search form input {
             order: 0;
@@ -45,10 +45,11 @@
             font-size: 0.95rem;
             color: var(--c-text);
             background: transparent;
+            text-align: right;
         }
-        #search form input::placeholder { color: var(--c-text-3); }
+        #search form input::placeholder { color: var(--c-text-3); text-align: right; }
         #search form .s-clear {
-            order: 1;
+            order: -1;
             display: none;
             align-items: center;
             justify-content: center;
@@ -79,13 +80,15 @@
             font-size: 0.95rem;
             line-height: normal;
             z-index: 80;
+            text-align: right;
         }
         #search.search-open .search-popup { display: block !important; }
         #search .search-popup .s-close {
             display: none;
             position: absolute;
             top: 10px;
-            right: 14px;
+            left: 14px;
+            right: auto;
             font-size: 0.8rem;
             color: var(--c-text-3);
             cursor: pointer;
@@ -276,7 +279,7 @@
                     </div>
                     <div class="logo">
                         <a href="/home" class="brand-logo">
-                            <span class="brand-txt">Anime</span><span class="brand-accent">Verse</span>
+                            <span class="brand-txt">Anime</span><span class="brand-accent">Luther</span>
                         </a>
                     </div>
                     <div id="search">
@@ -284,18 +287,18 @@
                             <button type="submit" aria-label="Search">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
-                            <input type="text" name="q" placeholder="Search anime..." aria-label="Search anime"/>
+                            <input type="text" name="q" placeholder="ابحث عن أنمي..." aria-label="Search anime"/>
                             <button type="button" class="s-clear" aria-label="Clear search" tabindex="-1">
                                 <i class="fa-solid fa-xmark"></i>
                             </button>
                             <div class="search-popup">
-                                <div class="s-close">Clear</div>
+                                <div class="s-close">إغلاق</div>
                                 <div class="inner">
                                     <div class="body"><div class="items"></div></div>
                                     <div class="foot">
-                                        <span class="hint">Press <kbd>Enter</kbd> to see all results</span>
+                                        <span class="hint">اضغط <kbd>Enter</kbd> لعرض كل النتائج</span>
                                         <a class="more" href="#" style="display: none">
-                                            View all results <i class="fas fa-long-arrow-right"></i>
+                                            عرض كل النتائج <i class="fas fa-long-arrow-left"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -305,9 +308,9 @@
                 </div>
                 <div class="end d-flex justify-content-between">
                     <div id="quick-menu" class="d-flex justify-content-around">
-                        <a id="random-anime" href="/random" class="main-menu" data-toggle="tooltip" title="Watch a random anime">
+                        <a id="random-anime" href="/random" class="main-menu" data-toggle="tooltip" title="أنمي عشوائي">
                             <i class="fas fa-shuffle"></i>
-                            <span>Random</span>
+                            <span>عشوائي</span>
                         </a>
                         <div id="lang">
                             <div class="settings-options switch" data-switch="title_lang" data-persist="true">
@@ -332,19 +335,19 @@
 
     <div class="search-page">
         <div class="result-head">
-            <h1 id="searchTitle">Search</h1>
+            <h1 id="searchTitle">البحث</h1>
             <span class="count" id="resultCount"></span>
         </div>
         <div id="resultsLoading" class="loading-msg">
             <div class="spinner"></div>
-            Searching...
+            جاري البحث...
         </div>
         <div id="resultsEmpty" class="empty" style="display:none"></div>
         <div class="ani items" id="resultsGrid" style="display:none"></div>
         <div class="paging" id="resultsPaging" style="display:none">
-            <button type="button" class="pg-btn prev" id="pgPrev"><i class="fas fa-chevron-left"></i> Prev</button>
+            <button type="button" class="pg-btn prev" id="pgPrev"><i class="fas fa-chevron-right"></i> السابق</button>
             <span id="pgInfo"></span>
-            <button type="button" class="pg-btn next" id="pgNext">Next <i class="fas fa-chevron-right"></i></button>
+            <button type="button" class="pg-btn next" id="pgNext">التالي <i class="fas fa-chevron-left"></i></button>
         </div>
     </div>
 
@@ -369,8 +372,6 @@
             if (popup && popup.querySelector('.items')) popup.querySelector('.items').innerHTML = '';
         }
 
-        // Close the live-search popup when tapping anywhere outside the search
-        // box (on mobile, also hide the bar) — keeps results tappable on touch.
         document.addEventListener('click', (e) => {
             if (search && search.classList.contains('search-open') && !search.contains(e.target) && !(searchToggler && searchToggler.contains(e.target))) {
                 search.classList.remove('search-open', 'show');
@@ -384,7 +385,7 @@
             const items = body.querySelector('.items');
             if (!items) return;
             if (searchItems.length === 0) {
-                items.innerHTML = '<div class="no-result">No results found</div>';
+                items.innerHTML = '<div class="no-result">لا توجد نتائج</div>';
                 searchIdx = -1;
                 return;
             }
@@ -402,7 +403,7 @@
                 const meta = [];
                 if (searchItems[i].year) meta.push(searchItems[i].year);
                 if (searchItems[i].format) meta.push(searchItems[i].format);
-                meta.push(searchItems[i].subCount + ' sub' + (searchItems[i].dubCount ? ' · ' + searchItems[i].dubCount + ' dub' : ''));
+                meta.push(searchItems[i].subCount + ' مترجم' + (searchItems[i].dubCount ? ' · ' + searchItems[i].dubCount + ' مدبلج' : ''));
                 el.querySelector('.meta').textContent = meta.join(' · ');
             });
             const more = popup.querySelector('.foot .more');
@@ -521,7 +522,6 @@
     })();
 
     // ============ SEARCH + BROWSE RESULTS ============
-    // ?q= full-text search; ?status=/?genre=/?format=/?letter=/?sort= browse
     (function () {
         const sp = new URLSearchParams(window.location.search);
         const q = sp.get('q') || '';
@@ -551,8 +551,8 @@
         if (!q && !browse) {
             loading.style.display = 'none';
             empty.style.display = 'block';
-            empty.innerHTML = '<p>Type a keyword in the search bar above to find anime.</p>';
-            title.textContent = 'Search';
+            empty.innerHTML = '<p>اكتب كلمة رئيسية في شريط البحث أعلاه للعثور على الأنمي.</p>';
+            title.textContent = 'البحث';
             return;
         }
 
@@ -587,7 +587,7 @@
             if (page < 0) page = 0;
             const slice = all.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
             grid.innerHTML = slice.map(card).join('');
-            pgInfo.textContent = 'Page ' + (page + 1) + ' of ' + pages + ' · ' + all.length + ' results';
+            pgInfo.textContent = 'صفحة ' + (page + 1) + ' من ' + pages + ' · ' + all.length + ' نتيجة';
             pgPrev.classList.toggle('disabled', page <= 0);
             pgNext.classList.toggle('disabled', page >= pages - 1);
         }
@@ -608,22 +608,22 @@
             if (sort) bp.set('sort', sort);
             endpoint = '/api/browse?' + bp.toString();
             const labels = {
-                'RELEASING': 'Ongoing', 'FINISHED': 'Completed',
-                'NOT_YET_RELEASED': 'Upcoming', 'HIATUS': 'Hiatus', 'CANCELLED': 'Cancelled',
+                'RELEASING': 'مستمر', 'FINISHED': 'مكتمل',
+                'NOT_YET_RELEASED': 'قريباً', 'HIATUS': 'متوقف مؤقتاً', 'CANCELLED': 'ملغي',
             };
             let label = '';
-            if (genre) label = 'Genre: <em>' + esc(genre) + '</em>';
-            else if (status) label = 'Status: <em>' + esc(labels[status] || status) + '</em>';
-            else if (format) label = 'Type: <em>' + esc(format) + '</em>';
-            else if (letter) label = 'A–Z: <em>' + esc(letter.toUpperCase()) + '</em>';
-            else if (sort === 'recent') label = '<em>New Releases</em>';
-            else if (sort === 'updated') label = '<em>Latest Updated</em>';
-            else if (sort === 'popular') label = '<em>Most Viewed</em>';
-            else if (sort === 'score') label = '<em>Top Rated</em>';
-            title.innerHTML = label || 'Browse';
+            if (genre) label = 'التصنيف: <em>' + esc(genre) + '</em>';
+            else if (status) label = 'الحالة: <em>' + esc(labels[status] || status) + '</em>';
+            else if (format) label = 'النوع: <em>' + esc(format) + '</em>';
+            else if (letter) label = 'حرف: <em>' + esc(letter.toUpperCase()) + '</em>';
+            else if (sort === 'recent') label = '<em>الإصدارات الجديدة</em>';
+            else if (sort === 'updated') label = '<em>المحدثة مؤخراً</em>';
+            else if (sort === 'popular') label = '<em>الأكثر مشاهدة</em>';
+            else if (sort === 'score') label = '<em>الأعلى تقييماً</em>';
+            title.innerHTML = label || 'تصفح';
         } else {
             endpoint = '/api/anime/search?q=' + encodeURIComponent(q);
-            title.innerHTML = 'Results for <em>' + esc(q) + '</em>';
+            title.innerHTML = 'نتائج البحث عن: <em>' + esc(q) + '</em>';
         }
 
         fetch(endpoint)
@@ -634,12 +634,12 @@
                 if (!all.length) {
                     empty.style.display = 'block';
                     empty.innerHTML = browse
-                        ? '<p>No anime found for this filter. Try a different one.</p>'
-                        : '<p>No results found for &quot;' + esc(q) + '&quot;. Try a different keyword.</p>';
-                    countEl.textContent = '0 results';
+                        ? '<p>لم يتم العثور على أنمي بهذا الفلتر. جرب فلتر آخر.</p>'
+                        : '<p>لا توجد نتائج مطابقة لـ &quot;' + esc(q) + '&quot;. جرب كلمة بحث أخرى.</p>';
+                    countEl.textContent = '0 نتيجة';
                     return;
                 }
-                countEl.textContent = all.length + ' results';
+                countEl.textContent = all.length + ' نتيجة';
                 grid.style.display = 'grid';
                 paging.style.display = 'flex';
                 render();
@@ -647,7 +647,7 @@
             .catch(err => {
                 loading.style.display = 'none';
                 empty.style.display = 'block';
-                empty.innerHTML = '<p>Something went wrong while loading results. Please try again.</p>';
+                empty.innerHTML = '<p>حدث خطأ أثناء تحميل النتائج. يرجى المحاولة مرة أخرى.</p>';
                 console.warn('[Search] Error:', err);
             });
     })();
